@@ -14,11 +14,11 @@ const viteSsgBin = resolve(
 );
 
 const sitemapRoutes = [
-  { path: "/", changefreq: "weekly", priority: "1.0" },
-  { path: "/market-compare", changefreq: "monthly", priority: "0.8" },
-  { path: "/payment-compare", changefreq: "monthly", priority: "0.8" },
-  { path: "/shipping-compare", changefreq: "monthly", priority: "0.8" },
+  { path: "/luggage", changefreq: "weekly", priority: "1.0" },
+  { path: "/esim", changefreq: "weekly", priority: "0.9" },
+  { path: "/exchange", changefreq: "weekly", priority: "0.9" },
   { path: "/about", changefreq: "monthly", priority: "0.4" },
+  { path: "/terms", changefreq: "yearly", priority: "0.3" },
   { path: "/privacy", changefreq: "yearly", priority: "0.3" },
 ];
 
@@ -32,7 +32,7 @@ function resolveBuildDate() {
 }
 
 function renderSitemap(buildDate) {
-  const baseUrl = "https://seller.shakilabs.com";
+  const baseUrl = "https://travel.shakilabs.com";
   const urls = sitemapRoutes
     .map(
       ({ path, changefreq, priority }) => `  <url>

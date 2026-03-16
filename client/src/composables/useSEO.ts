@@ -3,9 +3,10 @@ import { toValue, type MaybeRefOrGetter } from "vue";
 import { useRoute } from "vue-router";
 import { getSiteUrl } from "@/lib/site";
 
-const TITLE_SUFFIX = " | travel.shakilabs.com";
+const TITLE_SUFFIX = " | 여행 준비 비용 비교";
+const DEFAULT_TITLE = "여행 준비 비용 비교";
 const LEGACY_TITLE_SUFFIXES = [
-  " | 여행 준비 비용 비교",
+  " | travel.shakilabs.com",
   " | ShakiLabs",
   TITLE_SUFFIX,
 ] as const;
@@ -32,10 +33,10 @@ function normalizeTitle(rawTitle: string): string {
   }
 
   if (!baseTitle) {
-    return `여행 준비 비용 비교${TITLE_SUFFIX}`;
+    return DEFAULT_TITLE;
   }
 
-  return `${baseTitle}${TITLE_SUFFIX}`;
+  return baseTitle.includes(" | ") ? baseTitle : `${baseTitle}${TITLE_SUFFIX}`;
 }
 
 export function useSEO({

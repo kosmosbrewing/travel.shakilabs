@@ -46,7 +46,7 @@ onMounted(() => {
                 <img src="/favicon.png" alt="" class="h-4 w-4 shrink-0" />
               </span>
               <span class="hidden sm:inline font-brand text-tiny font-semibold tracking-wide text-foreground/90">
-                Travel by ShakiLabs
+                ShakiLabs
               </span>
             </RouterLink>
             <div class="flex h-full flex-1 items-center justify-center overflow-hidden text-center font-brand text-tiny sm:text-body">
