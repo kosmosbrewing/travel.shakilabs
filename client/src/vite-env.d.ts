@@ -18,6 +18,9 @@ interface ImportMetaEnv {
   readonly VITE_ADSENSE_SLOT_MARKET_COMPARE?: string;
   readonly VITE_ADSENSE_SLOT_PAYMENT_COMPARE?: string;
   readonly VITE_ADSENSE_SLOT_SHIPPING_COMPARE?: string;
+  readonly VITE_COUPANG_LUGGAGE_URL?: string;
+  readonly VITE_COUPANG_ESIM_URL?: string;
+  readonly VITE_COUPANG_POWERBANK_URL?: string;
   readonly VITE_KAKAO_JS_KEY?: string;
 }
 

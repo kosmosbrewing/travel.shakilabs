@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import AffiliateLinkPanel from "@/components/common/AffiliateLinkPanel.vue";
 import SummaryBanner from "@/components/common/SummaryBanner.vue";
 import TravelMetricGrid from "@/components/travel/TravelMetricGrid.vue";
 import TravelRankTable from "@/components/travel/TravelRankTable.vue";
 import TravelScenarioChips from "@/components/travel/TravelScenarioChips.vue";
+import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { exchangePresets } from "@/data/travelData";
 import { useExchangeCalculator } from "@/composables/useExchangeCalculator";
 import { formatNumber, formatWon } from "@/lib/utils";
@@ -67,6 +69,11 @@ function selectPreset(key: string): void {
     </div>
 
     <TravelMetricGrid :items="metrics" />
+    <AffiliateLinkPanel
+      title="환전 전에 같이 확인해 볼 여행 용품"
+      description="환전 수수료를 줄였다면 캐리어, eSIM, 보조배터리 가격도 함께 체크해 보세요."
+      :items="travelAffiliateItems"
+    />
     <TravelRankTable
       title="은행별 환전 수수료 비교"
       :rows="result.rows.map((row) => ({ name: row.name, value: formatWon(row.totalCost), helper: `${row.helper} · 수령액 ${formatNumber(row.foreignAmount)}` }))"

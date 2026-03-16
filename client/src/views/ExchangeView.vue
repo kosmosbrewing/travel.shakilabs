@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
+import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
 </script>
 
@@ -21,5 +23,6 @@ import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
         <ExchangeCalculator />
       </div>
     </div>
+    <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>
 </template>
