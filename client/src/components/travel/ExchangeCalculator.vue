@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import AffiliateLinkPanel from "@/components/common/AffiliateLinkPanel.vue";
-import SummaryBanner from "@/components/common/SummaryBanner.vue";
 import TravelMetricGrid from "@/components/travel/TravelMetricGrid.vue";
 import TravelRankTable from "@/components/travel/TravelRankTable.vue";
 import TravelScenarioChips from "@/components/travel/TravelScenarioChips.vue";
+import TravelSummaryCard from "@/components/travel/TravelSummaryCard.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { exchangePresets } from "@/data/travelData";
 import { useExchangeCalculator } from "@/composables/useExchangeCalculator";
@@ -54,9 +54,11 @@ function selectPreset(key: string): void {
         </div>
       </section>
 
-      <SummaryBanner
-        title="환전금액이 커질수록 은행별 우대율 차이가 체감 비용으로 이어집니다."
+      <TravelSummaryCard
+        headline="환전금액이 커질수록 은행별 우대율 차이가 체감 비용으로 이어집니다."
         :leader-value="result.best.name"
+        leader-label="이번 조건 추천 은행"
+        :leader-hint="`${state.currency} 현찰 환전 기준`"
         :delta-value="formatWon(result.spread)"
         delta-label="최저 수수료와 최고 수수료 차이"
         :facts="[
@@ -64,7 +66,6 @@ function selectPreset(key: string): void {
           { label: '환전 금액', value: formatWon(state.amountKrw) },
           { label: '통화', value: state.currency },
         ]"
-        highlight
       />
     </div>
 

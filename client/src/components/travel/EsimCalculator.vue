@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import AffiliateLinkPanel from "@/components/common/AffiliateLinkPanel.vue";
-import SummaryBanner from "@/components/common/SummaryBanner.vue";
 import TravelMetricGrid from "@/components/travel/TravelMetricGrid.vue";
 import TravelRankTable from "@/components/travel/TravelRankTable.vue";
 import TravelScenarioChips from "@/components/travel/TravelScenarioChips.vue";
+import TravelSummaryCard from "@/components/travel/TravelSummaryCard.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { TRAVEL_ASSUMPTION_NOTE, esimPresets } from "@/data/travelData";
 import { useEsimCalculator } from "@/composables/useEsimCalculator";
@@ -54,9 +54,11 @@ function selectPreset(key: string): void {
         </div>
       </section>
 
-      <SummaryBanner
-        title="인원 수가 늘면 포켓와이파이, 혼자면 eSIM이 유리한 구간이 자주 나옵니다."
+      <TravelSummaryCard
+        headline="인원 수가 늘면 포켓와이파이, 혼자면 eSIM이 유리한 구간이 자주 나옵니다."
         :leader-value="result.cheapest.name"
+        leader-label="이번 조건 최저가 옵션"
+        :leader-hint="`${state.tripDays}일 · ${state.travelers}명 여행 기준`"
         :delta-value="formatWon(result.spread)"
         delta-label="최저가와 최고가 차이"
         :facts="[
@@ -64,7 +66,6 @@ function selectPreset(key: string): void {
           { label: '총 여행일', value: `${state.tripDays}일` },
           { label: '인당 데이터', value: `${result.perTravelerDataGb}GB` },
         ]"
-        highlight
       />
     </div>
 

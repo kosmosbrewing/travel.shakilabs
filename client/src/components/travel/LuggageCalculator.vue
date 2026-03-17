@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import AffiliateLinkPanel from "@/components/common/AffiliateLinkPanel.vue";
-import SummaryBanner from "@/components/common/SummaryBanner.vue";
 import TravelMetricGrid from "@/components/travel/TravelMetricGrid.vue";
 import TravelRankTable from "@/components/travel/TravelRankTable.vue";
 import TravelScenarioChips from "@/components/travel/TravelScenarioChips.vue";
+import TravelSummaryCard from "@/components/travel/TravelSummaryCard.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { TRAVEL_ASSUMPTION_NOTE, luggagePresets } from "@/data/travelData";
 import { useLuggageCalculator } from "@/composables/useLuggageCalculator";
@@ -65,9 +65,11 @@ function selectPreset(key: string): void {
         </div>
       </section>
 
-      <SummaryBanner
-        title="동일한 가방 수라도 항공사별 총액 차이가 크게 벌어질 수 있습니다."
+      <TravelSummaryCard
+        headline="동일한 가방 수라도 항공사별 총액 차이가 크게 벌어질 수 있습니다."
         :leader-value="result.cheapest.name"
+        leader-label="이번 조건 최저가 항공사"
+        :leader-hint="`${state.tripSegments === 2 ? '왕복' : '편도'} · ${state.travelers}명 기준`"
         :delta-value="formatWon(result.spread)"
         delta-label="가장 비싼 옵션 대비 차이"
         :facts="[
@@ -75,7 +77,6 @@ function selectPreset(key: string): void {
           { label: '총 수하물 수', value: `${result.totalCheckedBags}개` },
           { label: '적용 무게', value: `${state.bagWeightKg}kg` },
         ]"
-        highlight
       />
     </div>
 
