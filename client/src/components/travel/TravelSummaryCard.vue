@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, TrendingDown } from "lucide-vue-next";
+import { Sparkles, ArrowDown, BarChart3 } from "lucide-vue-next";
 
 interface SummaryFact {
   label: string;
@@ -20,64 +19,64 @@ defineProps<{
 </script>
 
 <template>
-  <Card class="overflow-hidden border-border/60 shadow-sm">
+  <Card class="summary-card overflow-hidden border-border/60 shadow-sm">
     <CardContent class="p-0">
-      <section class="border-b border-border/60 bg-muted/20 px-4 py-4 sm:px-5">
-        <div class="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
-          <div class="min-w-0">
-            <Badge variant="secondary" class="rounded-full px-3 py-1 text-[11px] tracking-[0.08em]">
-              {{ leaderLabel }}
-            </Badge>
-            <div class="mt-2 flex flex-wrap items-end gap-x-3 gap-y-1">
-              <p class="text-[24px] font-bold leading-none tracking-tight text-foreground sm:text-[30px]">
-                {{ leaderValue }}
-              </p>
-              <p v-if="leaderHint" class="text-caption leading-relaxed text-muted-foreground">
-                {{ leaderHint }}
-              </p>
-            </div>
-          </div>
-
-          <div class="rounded-xl border border-profit/20 bg-profit/5 px-4 py-3 lg:min-w-[220px]">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <p class="text-caption font-semibold text-muted-foreground">
-                  {{ deltaLabel }}
-                </p>
-                <p class="mt-1.5 text-[22px] font-bold tracking-tight text-foreground sm:text-[26px]">
-                  {{ deltaValue }}
-                </p>
-              </div>
-              <Badge variant="profit" class="rounded-full px-3 py-1">
-                절감 폭
-              </Badge>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-3 flex items-start gap-2 rounded-xl border border-border/50 bg-background/80 px-3 py-2.5">
-          <Sparkles class="mt-0.5 size-4 shrink-0 text-primary" />
-          <p class="text-caption leading-relaxed text-muted-foreground">
-            {{ headline }}
-          </p>
-        </div>
+      <!-- 히어로: 최적 결과 -->
+      <section class="px-5 pb-4 pt-5 sm:px-6 sm:pt-6">
+        <p class="text-tiny font-semibold uppercase tracking-widest text-primary">
+          {{ leaderLabel }}
+        </p>
+        <p class="mt-1.5 text-[28px] font-bold leading-tight tracking-tight text-foreground sm:text-[34px]">
+          {{ leaderValue }}
+        </p>
+        <p v-if="leaderHint" class="mt-1 text-caption text-muted-foreground">
+          {{ leaderHint }}
+        </p>
       </section>
 
-      <section class="px-4 py-3 sm:px-5 sm:py-4">
-        <div class="flex items-center gap-2 text-caption font-semibold text-muted-foreground">
-          <TrendingDown class="size-4 text-primary" />
+      <!-- 절감폭 배너 -->
+      <div class="mx-4 rounded-xl bg-profit/8 px-4 py-3 sm:mx-5">
+        <div class="flex items-center gap-2">
+          <ArrowDown class="size-4 shrink-0 text-profit" :stroke-width="2.5" />
+          <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+            <span class="text-[20px] font-bold tabular-nums text-profit sm:text-[22px]">
+              {{ deltaValue }}
+            </span>
+            <span class="text-caption font-medium text-profit/70">절감</span>
+          </div>
+        </div>
+        <p class="mt-1 pl-6 text-tiny text-muted-foreground">
+          {{ deltaLabel }}
+        </p>
+      </div>
+
+      <!-- 인사이트 -->
+      <div class="mx-4 mt-3 flex items-start gap-2 rounded-xl border border-border/40 bg-muted/15 px-3.5 py-2.5 sm:mx-5">
+        <Sparkles class="mt-0.5 size-3.5 shrink-0 text-primary/70" />
+        <p class="text-tiny leading-relaxed text-muted-foreground">
+          {{ headline }}
+        </p>
+      </div>
+
+      <!-- 구분선 -->
+      <hr class="mx-4 mt-4 border-border/40 sm:mx-5" />
+
+      <!-- 입력 기준 요약 -->
+      <section class="px-5 pb-5 pt-3.5 sm:px-6 sm:pb-6">
+        <div class="flex items-center gap-1.5 text-tiny font-semibold uppercase tracking-widest text-muted-foreground">
+          <BarChart3 class="size-3.5" />
           입력 기준 요약
         </div>
-        <div class="mt-3 grid gap-2 sm:grid-cols-3">
+        <div class="mt-2.5 grid grid-cols-3 gap-2">
           <article
             v-for="fact in facts"
             :key="fact.label"
-            class="rounded-xl border border-border/60 bg-muted/25 p-3"
+            class="rounded-lg bg-muted/30 px-3 py-2.5"
           >
-            <p class="text-caption font-semibold text-muted-foreground">
+            <p class="text-tiny font-medium text-muted-foreground">
               {{ fact.label }}
             </p>
-            <p class="mt-1.5 text-[16px] font-bold leading-snug text-foreground tabular-nums">
+            <p class="mt-1 text-body font-bold leading-snug text-foreground tabular-nums">
               {{ fact.value }}
             </p>
           </article>
@@ -86,3 +85,13 @@ defineProps<{
     </CardContent>
   </Card>
 </template>
+
+<style scoped>
+.summary-card {
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--card)) 0%,
+    hsl(var(--muted) / 0.15) 100%
+  );
+}
+</style>
