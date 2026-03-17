@@ -12,6 +12,7 @@ export const badgeVariants = cva(
         deduction: "border-transparent bg-deduction text-deduction-foreground",
         highlight: "border-transparent bg-highlight text-highlight-foreground",
         neutral: "border-border/50 bg-muted-foreground/70 text-white",
+        profit: "border-transparent bg-profit/12 text-profit",
       },
     },
     defaultVariants: {
