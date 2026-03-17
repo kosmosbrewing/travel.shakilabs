@@ -1,5 +1,4 @@
 import {
-  BASE_EXCHANGE_RATES,
   BASE_SPREADS,
   ESIM_PLANS,
   EXCHANGE_BANKS,
@@ -9,6 +8,7 @@ import {
   POCKET_WIFI_SHARE_CAPACITY,
   ROAMING_DAILY_PRICE,
 } from "@/data/travelData";
+import { BASE_EXCHANGE_RATES } from "@/data/exchangeRates";
 import type { ExchangeInput, EsimInput, LuggageInput } from "@/lib/validators";
 import {
   sanitizeExchangeInput,

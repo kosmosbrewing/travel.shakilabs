@@ -27,12 +27,6 @@ export const POCKET_WIFI_DAILY_PRICE = 7_500;
 export const POCKET_WIFI_ORDER_FEE = 8_000;
 export const POCKET_WIFI_SHARE_CAPACITY = 3;
 
-export const BASE_EXCHANGE_RATES = {
-  USD: 1_370,
-  JPY: 9.1,
-  EUR: 1_490,
-} as const;
-
 export const BASE_SPREADS = {
   USD: 0.0175,
   JPY: 0.0197,

@@ -3,8 +3,10 @@ import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
+import { useTravelExchangeRates } from "@/composables/useTravelExchangeRates";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
-import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
+
+const { badgeMessage } = useTravelExchangeRates();
 </script>
 
 <template>
@@ -16,7 +18,7 @@ import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
     <div class="retro-panel overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
         <h1 class="retro-title">은행별 환전 수수료 비교</h1>
-        <FreshBadge :message="TRAVEL_BADGE_MESSAGE" />
+        <FreshBadge :message="badgeMessage" />
       </div>
       <div class="retro-panel-content space-y-4">
         <p class="text-caption leading-relaxed text-muted-foreground">같은 환전금액이라도 우대율 차이로 실제 수수료가 벌어집니다. 출국 전에 어떤 은행이 가장 유리한지 확인해 보세요.</p>
