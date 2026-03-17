@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Card, CardContent } from "@/components/ui/card";
+
 defineProps<{
   items: ReadonlyArray<{ label: string; value: string; helper: string }>;
 }>();
@@ -6,14 +8,16 @@ defineProps<{
 
 <template>
   <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-    <article
+    <Card
       v-for="item in items"
       :key="item.label"
-      class="retro-panel-muted p-4"
+      class="border-border/50 bg-muted/30"
     >
-      <p class="text-caption font-semibold text-muted-foreground">{{ item.label }}</p>
-      <p class="mt-2 text-heading font-bold text-foreground">{{ item.value }}</p>
-      <p class="mt-1 text-tiny leading-relaxed text-muted-foreground">{{ item.helper }}</p>
-    </article>
+      <CardContent class="p-4">
+        <p class="text-caption font-semibold text-muted-foreground">{{ item.label }}</p>
+        <p class="mt-2 text-heading font-bold text-foreground">{{ item.value }}</p>
+        <p class="mt-1 text-tiny leading-relaxed text-muted-foreground">{{ item.helper }}</p>
+      </CardContent>
+    </Card>
   </div>
 </template>
