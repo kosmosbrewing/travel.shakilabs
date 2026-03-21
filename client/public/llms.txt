@@ -1,0 +1,25 @@
+# 여행 계산기 — shakilabs.com/travel
+
+> 항공 수하물 규정 비교, 해외 eSIM 요금 비교, 환전 수수료 비교 등 해외여행 준비에 필요한 비용을 비교하는 무료 서비스입니다.
+
+## 사이트 정보
+
+- URL: https://shakilabs.com/travel
+- 언어: 한국어
+- 데이터 기준: 2026년 항공사·통신사 공식 요금
+
+## 주요 계산기
+
+- [수하물 규정 비교](https://shakilabs.com/travel/luggage): 항공사별 기내·위탁 수하물 무게·크기·요금 비교
+- [해외 eSIM 비교](https://shakilabs.com/travel/esim): 국가별 eSIM 요금·데이터 비교
+- [환전 수수료 비교](https://shakilabs.com/travel/exchange): 은행·환전소 환율·수수료 비교
+
+## 데이터 출처
+
+- 수하물: 각 항공사 공식 수하물 안내
+- eSIM: 주요 eSIM 서비스 공식 요금표
+- 환율: 주요 은행 고시환율
+
+## 연락처
+
+- 이메일: skdba1313@gmail.com
