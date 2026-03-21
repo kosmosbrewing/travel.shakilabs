@@ -11,7 +11,7 @@ const { badgeMessage } = useTravelExchangeRates();
 
 <template>
   <SEOHead
-    title="환전 수수료 비교 | travel.shakilabs.com"
+    title="환전 수수료 비교 | shakilabs.com/travel"
     description="USD, JPY, EUR 기준으로 은행별 환전 우대율과 예상 수수료를 비교하세요."
   />
   <div class="container space-y-5 py-5">

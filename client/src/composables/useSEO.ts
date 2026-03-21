@@ -6,7 +6,7 @@ import { getSiteUrl } from "@/lib/site";
 const TITLE_SUFFIX = " | 여행 준비 비용 비교";
 const DEFAULT_TITLE = "여행 준비 비용 비교";
 const LEGACY_TITLE_SUFFIXES = [
-  " | travel.shakilabs.com",
+  " | shakilabs.com/travel",
   " | ShakiLabs",
   TITLE_SUFFIX,
 ] as const;

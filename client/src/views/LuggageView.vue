@@ -38,7 +38,7 @@ const faqJsonLd = {
 
 <template>
   <SEOHead
-    title="LCC 수하물 요금 비교 | travel.shakilabs.com"
+    title="LCC 수하물 요금 비교 | shakilabs.com/travel"
     description="제주항공, 진에어, 티웨이, 에어부산 위탁수하물 요금을 왕복 기준으로 비교하세요."
     :json-ld="faqJsonLd"
   />

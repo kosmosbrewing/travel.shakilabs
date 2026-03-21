@@ -32,7 +32,7 @@ function resolveBuildDate() {
 }
 
 function renderSitemap(buildDate) {
-  const baseUrl = "https://travel.shakilabs.com";
+  const baseUrl = "https://shakilabs.com/travel";
   const urls = sitemapRoutes
     .map(
       ({ path, changefreq, priority }) => `  <url>

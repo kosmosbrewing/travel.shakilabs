@@ -13,7 +13,7 @@ const items: RelatedServiceItem[] = [
   {
     title: "해외결제 카드 비교",
     description: "환전수수료와 DCC까지 반영해 여행 결제 카드를 바로 비교합니다.",
-    href: "https://card.shakilabs.com/overseas-payment",
+    href: "/card/overseas-payment",
     icon: CreditCard,
   },
 ];

@@ -10,7 +10,7 @@ const constantsStore = useConstantsStore();
 <template>
   <SEOHead
     title="서비스 안내"
-    description="travel.shakilabs.com은 수하물, 데이터 로밍, 환전 비용을 빠르게 비교하는 여행 준비 계산기입니다."
+    description="shakilabs.com/travel은 수하물, 데이터 로밍, 환전 비용을 빠르게 비교하는 여행 준비 계산기입니다."
   />
 
   <div class="container py-5 space-y-5">
@@ -22,7 +22,7 @@ const constantsStore = useConstantsStore();
       <div class="retro-panel-content space-y-4">
         <h2 class="text-heading font-bold">여행 준비 비용 비교 도구</h2>
         <p class="text-body text-muted-foreground">
-          travel.shakilabs.com은 출국 전에 자주 고민하는 3가지 비용을 빠르게 비교하는 무료 도구입니다.
+          shakilabs.com/travel은 출국 전에 자주 고민하는 3가지 비용을 빠르게 비교하는 무료 도구입니다.
           LCC 위탁수하물 요금, eSIM과 로밍/포켓와이파이 비용, 은행별 환전 수수료를 한 화면에서
           비교해 여행 예산을 더 쉽게 잡을 수 있습니다.
         </p>

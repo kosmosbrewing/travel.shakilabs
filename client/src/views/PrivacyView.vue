@@ -8,7 +8,7 @@ const constantsStore = useConstantsStore();
 <template>
   <SEOHead
     title="개인정보 처리방침"
-    description="travel.shakilabs.com의 개인정보 처리방침입니다."
+    description="shakilabs.com/travel의 개인정보 처리방침입니다."
   />
 
   <div class="container py-5">
@@ -19,7 +19,7 @@ const constantsStore = useConstantsStore();
 
       <div class="retro-panel-content space-y-4">
         <p class="text-body text-muted-foreground">
-          travel.shakilabs.com(이하 "본 서비스")은 이용자의 개인정보를 중요하게 생각하며,
+          shakilabs.com/travel(이하 "본 서비스")은 이용자의 개인정보를 중요하게 생각하며,
           다음과 같이 개인정보를 처리합니다.
         </p>
 

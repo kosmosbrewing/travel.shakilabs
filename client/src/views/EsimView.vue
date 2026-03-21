@@ -9,7 +9,7 @@ import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
 
 <template>
   <SEOHead
-    title="eSIM vs 로밍 vs 포켓와이파이 | travel.shakilabs.com"
+    title="eSIM vs 로밍 vs 포켓와이파이 | shakilabs.com/travel"
     description="여행 일수와 동행 인원을 기준으로 eSIM, 통신사 로밍, 포켓와이파이 비용을 비교하세요."
   />
   <div class="container space-y-5 py-5">
