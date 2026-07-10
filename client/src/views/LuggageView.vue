@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ShSurface, ShText } from "@shakilabs/ui";
 import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
@@ -43,9 +44,9 @@ const faqJsonLd = {
     :json-ld="faqJsonLd"
   />
   <div class="container space-y-5 py-5">
-    <div class="retro-panel overflow-hidden">
+    <ShSurface padding="none" class="overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
-        <h1 class="retro-title">LCC 위탁수하물 예산 계산</h1>
+        <ShText as="h1" variant="heading">LCC 위탁수하물 예산 계산</ShText>
         <FreshBadge :message="TRAVEL_BADGE_MESSAGE" />
       </div>
       <div class="retro-panel-content space-y-4">
@@ -63,7 +64,7 @@ const faqJsonLd = {
           >{{ source.name }}</a>
         </div>
       </div>
-    </div>
+    </ShSurface>
     <div class="retro-panel overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
         <h2 class="retro-title">자주 묻는 질문</h2>
