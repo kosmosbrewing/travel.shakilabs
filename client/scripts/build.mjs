@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
+import { SEO_ROUTE_CONFIGS } from "./seo-routes.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(__dirname, "..");
@@ -12,15 +13,6 @@ const viteSsgBin = resolve(
   ".bin",
   process.platform === "win32" ? "vite-ssg.cmd" : "vite-ssg"
 );
-
-const sitemapRoutes = [
-  { path: "/luggage", changefreq: "weekly", priority: "1.0" },
-  { path: "/esim", changefreq: "weekly", priority: "0.9" },
-  { path: "/exchange", changefreq: "weekly", priority: "0.9" },
-  { path: "/about", changefreq: "monthly", priority: "0.4" },
-  { path: "/terms", changefreq: "yearly", priority: "0.3" },
-  { path: "/privacy", changefreq: "yearly", priority: "0.3" },
-];
 
 function resolveBuildDate() {
   const candidate = process.env.BUILD_DATE?.trim();
@@ -33,7 +25,7 @@ function resolveBuildDate() {
 
 function renderSitemap(buildDate) {
   const baseUrl = "https://shakilabs.com/travel";
-  const urls = sitemapRoutes
+  const urls = SEO_ROUTE_CONFIGS
     .map(
       ({ path, changefreq, priority }) => `  <url>
     <loc>${path === "/" ? `${baseUrl}/` : `${baseUrl}${path}`}</loc>
@@ -65,8 +57,17 @@ const result = spawnSync(viteSsgBin, ["build"], {
   },
 });
 
-if (typeof result.status === "number") {
-  process.exit(result.status);
+if (result.status !== 0) {
+  process.exit(result.status ?? 1);
 }
 
-process.exit(1);
+const validationResult = spawnSync(
+  process.execPath,
+  [resolve(projectRoot, "scripts", "validate-static-output.mjs")],
+  {
+    cwd: projectRoot,
+    stdio: "inherit",
+  }
+);
+
+process.exit(validationResult.status ?? 1);
