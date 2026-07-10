@@ -1,16 +1,22 @@
 import type { ExchangeInput, EsimInput, LuggageInput } from "@/lib/validators";
 
-export const TRAVEL_DATA_UPDATED = "2026년 3월";
-export const TRAVEL_DATA_VERIFIED = "2026년 3월 15일";
-export const TRAVEL_BADGE_MESSAGE = "2026년 3월 요금표 가정 기준";
+export const TRAVEL_DATA_UPDATED = "2026년 7월";
+export const TRAVEL_DATA_VERIFIED = "2026년 7월 10일";
+export const TRAVEL_BADGE_MESSAGE = "2026-07-10 비교 가정 점검";
 export const TRAVEL_ASSUMPTION_NOTE =
-  "항공사 이벤트 운임, 통신사 프로모션, 실시간 환율과 카드 우대율은 반영하지 않은 단순 비교용 계산입니다.";
+  "표시 금액은 견적이 아닌 예산 시나리오입니다. 노선·운임·무료 수하물·구매 시점, 통신사·판매처 프로모션, 실시간 환율은 최종 결제 전에 공식 페이지에서 확인하세요.";
 
 export const LUGGAGE_CARRIERS = [
-  { code: "jinair", name: "진에어", rates: { 15: 30_000, 20: 40_000, 25: 55_000 } },
-  { code: "jejuair", name: "제주항공", rates: { 15: 35_000, 20: 45_000, 25: 60_000 } },
-  { code: "tway", name: "티웨이", rates: { 15: 32_000, 20: 42_000, 25: 57_000 } },
-  { code: "airbusan", name: "에어부산", rates: { 15: 34_000, 20: 44_000, 25: 59_000 } },
+  { code: "budget-low", name: "낮은 예산 가정", rates: { 15: 30_000, 20: 40_000, 25: 55_000 } },
+  { code: "budget-mid", name: "중간 예산 가정", rates: { 15: 35_000, 20: 45_000, 25: 60_000 } },
+  { code: "budget-high", name: "높은 예산 가정", rates: { 15: 60_000, 20: 80_000, 25: 100_000 } },
+] as const;
+
+export const LUGGAGE_SOURCES = [
+  { name: "진에어", url: "https://www.jinair.com/flight/baggage" },
+  { name: "제주항공", url: "https://www.jejuair.net/ko/linkService/boardingProcessGuide/prePurchaseBaggage.do" },
+  { name: "티웨이항공", url: "https://www.twayair.com/app/serviceInfo/luggageAmtCal" },
+  { name: "에어부산", url: "https://www.airbusan.com/content/common/service/luggagePurchase" },
 ] as const;
 
 export const ESIM_PLANS = [
@@ -34,11 +40,9 @@ export const BASE_SPREADS = {
 } as const;
 
 export const EXCHANGE_BANKS = [
-  { code: "hana", name: "하나은행", discountRate: 0.9 },
-  { code: "kb", name: "KB국민", discountRate: 0.8 },
-  { code: "shinhan", name: "신한은행", discountRate: 0.8 },
-  { code: "woori", name: "우리은행", discountRate: 0.7 },
-  { code: "toss", name: "토스뱅크", discountRate: 0.9 },
+  { code: "discount-90", name: "우대율 90% 조건", discountRate: 0.9 },
+  { code: "discount-80", name: "우대율 80% 조건", discountRate: 0.8 },
+  { code: "discount-70", name: "우대율 70% 조건", discountRate: 0.7 },
 ] as const;
 
 export const luggagePresets: ReadonlyArray<{
