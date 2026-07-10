@@ -15,7 +15,7 @@ const { state, result, applyPreset, reset } = useExchangeCalculator();
 const metrics = computed(() => [
   { label: "최저 수수료", value: formatWon(result.value.best.totalCost), helper: result.value.best.name },
   { label: "최고 수수료", value: formatWon(result.value.worst.totalCost), helper: result.value.worst.name },
-  { label: "은행 간 차이", value: formatWon(result.value.spread), helper: "같은 환전금액 기준" },
+  { label: "우대 조건 간 차이", value: formatWon(result.value.spread), helper: "같은 환전금액 기준" },
   { label: "최저가 수령액", value: formatNumber(result.value.best.foreignAmount), helper: `${state.currency} 기준` },
 ]);
 
@@ -55,9 +55,9 @@ function selectPreset(key: string): void {
       </section>
 
       <TravelSummaryCard
-        headline="환전금액이 커질수록 은행별 우대율 차이가 체감 비용으로 이어집니다."
+        headline="환전금액이 커질수록 적용 우대율 차이가 체감 비용으로 이어집니다."
         :leader-value="result.best.name"
-        leader-label="이번 조건 추천 은행"
+        leader-label="가장 유리한 우대 조건"
         :leader-hint="`${state.currency} 현찰 환전 기준`"
         :delta-value="formatWon(result.spread)"
         delta-label="최저 수수료와 최고 수수료 차이"
@@ -76,7 +76,7 @@ function selectPreset(key: string): void {
       :items="travelAffiliateItems"
     />
     <TravelRankTable
-      title="은행별 환전 수수료 비교"
+      title="우대율별 환전 수수료 비교"
       :rows="result.rows.map((row) => ({ name: row.name, value: formatWon(row.totalCost), helper: `${row.helper} · 수령액 ${formatNumber(row.foreignAmount)}` }))"
     />
   </div>

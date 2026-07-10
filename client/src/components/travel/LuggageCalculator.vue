@@ -61,14 +61,14 @@ function selectPreset(key: string): void {
           <button type="button" class="retro-panel px-3 py-2 text-caption font-semibold text-foreground" @click="reset">
             기본값으로 초기화
           </button>
-          <p class="text-tiny text-muted-foreground">LCC 사전구매 기준 예시 요금으로 계산합니다.</p>
+          <p class="text-tiny text-muted-foreground">노선별 공식 견적이 아닌 낮음·중간·높음 예산 시나리오입니다.</p>
         </div>
       </section>
 
       <TravelSummaryCard
-        headline="동일한 가방 수라도 항공사별 총액 차이가 크게 벌어질 수 있습니다."
+        headline="노선과 운임 종류에 따라 실제 수하물 총액은 예산 범위를 벗어날 수 있습니다."
         :leader-value="result.cheapest.name"
-        leader-label="이번 조건 최저가 항공사"
+        leader-label="낮은 예산 시나리오"
         :leader-hint="`${state.tripSegments === 2 ? '왕복' : '편도'} · ${state.travelers}명 기준`"
         :delta-value="formatWon(result.spread)"
         delta-label="가장 비싼 옵션 대비 차이"
@@ -88,7 +88,7 @@ function selectPreset(key: string): void {
       :items="travelAffiliateItems"
     />
     <TravelRankTable
-      title="항공사별 위탁수하물 총비용"
+      title="위탁수하물 예산 시나리오"
       :rows="result.rows.map((row) => ({ name: row.name, value: formatWon(row.totalCost), helper: row.helper }))"
     />
   </div>

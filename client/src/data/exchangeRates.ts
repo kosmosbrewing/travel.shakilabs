@@ -10,8 +10,8 @@ export const BASE_EXCHANGE_RATES = reactive<Record<TravelCurrency, number>>({
 });
 
 export const EXCHANGE_RATE_STATUS = reactive({
-  lastUpdated: "2026년 3월 요금표 가정 기준",
-  source: "서비스 내 수동 환율 가정",
+  lastUpdated: "실시간 환율 연동 전 · 2026년 3월 수동 가정값",
+  source: "API 응답 실패 시 사용하는 비교용 기본값",
 });
 
 const rateUnits: Record<TravelCurrency, number> = {

@@ -19,9 +19,9 @@ describe("calcLuggageComparison", () => {
     expect(result.totalCheckedBags).toBe(4);
   });
 
-  it("기본 시나리오에서는 진에어가 가장 저렴하다", () => {
+  it("기본 시나리오에서는 낮은 예산 가정이 가장 저렴하다", () => {
     const result = calcLuggageComparison(DEFAULT_LUGGAGE_INPUT);
-    expect(result.cheapest.name).toBe("진에어");
+    expect(result.cheapest.name).toBe("낮은 예산 가정");
   });
 
   it("가방 수가 늘어나면 총액도 비례해서 증가한다", () => {
@@ -49,9 +49,9 @@ describe("calcConnectivityComparison", () => {
 });
 
 describe("calcExchangeComparison", () => {
-  it("USD 기준 90% 우대 은행이 가장 유리하다", () => {
+  it("USD 기준 90% 우대 조건이 가장 유리하다", () => {
     const result = calcExchangeComparison({ amountKrw: 1_000_000, currency: "USD" });
-    expect(["하나은행", "토스뱅크"]).toContain(result.best.name);
+    expect(result.best.name).toBe("우대율 90% 조건");
   });
 
   it("같은 금액이면 JPY가 USD보다 수수료가 크다", () => {
