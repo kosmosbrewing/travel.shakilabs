@@ -1,5 +1,6 @@
 import { computed, reactive } from "vue";
 import { fetchExchangeRateSnapshot, type ExchangeRateApiSnapshot } from "@/lib/publicDataApi";
+import { isRemoteConstantsEnabled } from "@/lib/api";
 
 export type TravelCurrency = "USD" | "JPY" | "EUR";
 
@@ -41,6 +42,8 @@ function applyExchangeRateSnapshot(snapshot: ExchangeRateApiSnapshot): void {
 }
 
 export async function loadTravelExchangeRates(forceRefresh = false): Promise<void> {
+  if (!isRemoteConstantsEnabled()) return;
+
   if (exchangeRatesPromise && !forceRefresh) return exchangeRatesPromise;
 
   exchangeRatesPromise = (async () => {

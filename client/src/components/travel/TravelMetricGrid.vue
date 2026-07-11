@@ -13,7 +13,7 @@ defineProps<{
       :key="item.label"
       class="border-border/50 bg-muted/30"
     >
-      <CardContent class="p-4">
+      <CardContent class="travel-metric-card p-4">
         <p class="text-caption font-semibold text-muted-foreground">{{ item.label }}</p>
         <p class="mt-2 text-heading font-bold text-foreground">{{ item.value }}</p>
         <p class="mt-1 text-tiny leading-relaxed text-muted-foreground">{{ item.helper }}</p>
