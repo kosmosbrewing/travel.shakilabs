@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ShBadge, ShTable, ShTableBody, ShTableCell, ShTableHead, ShTableHeader, ShTableRow } from "@shakilabs/ui";
+
 defineProps<{
   title: string;
   rows: ReadonlyArray<{ name: string; value: string; helper: string }>;
@@ -11,35 +13,31 @@ defineProps<{
       <h2 class="retro-title">{{ title }}</h2>
     </div>
     <div class="retro-panel-content p-0">
-      <table class="w-full text-left text-caption">
-        <thead class="bg-muted/25 text-muted-foreground">
-          <tr>
-            <th class="px-4 py-3 font-semibold">순위</th>
-            <th class="px-4 py-3 font-semibold">옵션</th>
-            <th class="px-4 py-3 font-semibold text-right">총비용</th>
-            <th class="hidden px-4 py-3 font-semibold lg:table-cell">비고</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
+      <ShTable :aria-label="title" density="compact" min-width="34rem" scroll-hint="표를 좌우로 스크롤해 전체 옵션을 확인하세요.">
+        <ShTableHeader>
+          <ShTableRow>
+            <ShTableHead>순위</ShTableHead>
+            <ShTableHead>옵션</ShTableHead>
+            <ShTableHead numeric>총비용</ShTableHead>
+            <ShTableHead>비고</ShTableHead>
+          </ShTableRow>
+        </ShTableHeader>
+        <ShTableBody>
+          <ShTableRow
             v-for="(row, index) in rows"
             :key="row.name"
-            class="border-t border-border/50"
           >
-            <td class="px-4 py-3">
-              <span
-                class="inline-flex h-6 w-6 items-center justify-center rounded-full text-tiny font-bold"
-                :class="index === 0 ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'"
-              >
+            <ShTableCell>
+              <ShBadge :tone="index === 0 ? 'primary' : 'neutral'">
                 {{ index + 1 }}
-              </span>
-            </td>
-            <td class="px-4 py-3 font-semibold text-foreground">{{ row.name }}</td>
-            <td class="px-4 py-3 text-right font-bold text-foreground">{{ row.value }}</td>
-            <td class="hidden px-4 py-3 text-muted-foreground lg:table-cell">{{ row.helper }}</td>
-          </tr>
-        </tbody>
-      </table>
+              </ShBadge>
+            </ShTableCell>
+            <ShTableCell emphasis>{{ row.name }}</ShTableCell>
+            <ShTableCell numeric emphasis>{{ row.value }}</ShTableCell>
+            <ShTableCell class="text-muted-foreground">{{ row.helper }}</ShTableCell>
+          </ShTableRow>
+        </ShTableBody>
+      </ShTable>
     </div>
   </section>
 </template>
