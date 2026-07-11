@@ -9,7 +9,7 @@ const buildDate = process.env.BUILD_DATE ?? new Date().toISOString().slice(0, 10
 
 export default defineConfig({
   test: {
-    include: ["src/**/*.test.ts"],
+    include: ["src/**/*.test.{ts,mjs}"],
   },
   base: "/travel/",
   css: {
