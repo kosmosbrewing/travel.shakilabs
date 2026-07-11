@@ -43,7 +43,7 @@ const faqJsonLd = {
     description="여행 인원과 가방 무게를 기준으로 위탁수하물 예산 범위를 계산하고 항공사 공식 요금표를 확인하세요."
     :json-ld="faqJsonLd"
   />
-  <div class="container space-y-5 py-5">
+  <div class="text-resize-layout container space-y-5 py-5">
     <ShSurface padding="none" class="overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
         <ShText as="h1" variant="heading">LCC 위탁수하물 예산 계산</ShText>

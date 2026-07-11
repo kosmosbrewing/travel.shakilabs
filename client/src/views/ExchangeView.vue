@@ -5,6 +5,7 @@ import FreshBadge from "@/components/common/FreshBadge.vue";
 import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
 import { useTravelExchangeRates } from "@/composables/useTravelExchangeRates";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
+import { EXCHANGE_RATE_STATUS } from "@/data/exchangeRates";
 
 const { badgeMessage } = useTravelExchangeRates();
 
@@ -48,6 +49,9 @@ const faqJsonLd = {
       </div>
       <div class="retro-panel-content space-y-4">
         <p class="text-caption leading-relaxed text-muted-foreground">같은 환전금액이라도 적용 우대율에 따라 예상 수수료가 달라집니다. 거래 은행 앱에서 실제 우대율을 확인한 뒤 비교하세요.</p>
+        <p class="rounded-lg border border-border bg-muted/30 px-3 py-2 text-caption leading-relaxed text-muted-foreground">
+          환율 출처: {{ EXCHANGE_RATE_STATUS.source }}
+        </p>
         <ExchangeCalculator />
       </div>
     </div>

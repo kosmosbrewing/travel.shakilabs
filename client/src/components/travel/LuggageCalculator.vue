@@ -30,7 +30,7 @@ function selectPreset(key: string): void {
     <TravelScenarioChips :items="luggagePresets" @select="selectPreset" />
 
     <div class="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-      <section class="retro-panel-muted p-4 space-y-4">
+      <section class="luggage-input-panel retro-panel-muted space-y-4 p-4">
         <div class="grid gap-3 sm:grid-cols-2">
           <label class="space-y-1.5">
             <span class="text-caption font-semibold text-foreground">여행 인원</span>
