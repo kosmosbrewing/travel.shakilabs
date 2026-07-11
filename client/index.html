@@ -43,6 +43,26 @@
         "inLanguage": "ko"
       }
     </script>
+    <script>
+      (() => {
+        try {
+          const key = "travel-tools:theme:v1";
+          const saved = localStorage.getItem(key);
+          const prefersDark =
+            typeof window.matchMedia === "function" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const theme =
+            saved === "dark" || saved === "light"
+              ? saved
+              : prefersDark
+                ? "dark"
+                : "light";
+          if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+          }
+        } catch {}
+      })();
+    </script>
     <style>
       :root {
         --background: 210 40% 98%;
