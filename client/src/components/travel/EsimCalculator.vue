@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import AffiliateLinkPanel from "@/components/common/AffiliateLinkPanel.vue";
 import TravelMetricGrid from "@/components/travel/TravelMetricGrid.vue";
+import TravelCostBars from "@/components/travel/TravelCostBars.vue";
 import TravelRankTable from "@/components/travel/TravelRankTable.vue";
 import TravelScenarioChips from "@/components/travel/TravelScenarioChips.vue";
 import TravelSummaryCard from "@/components/travel/TravelSummaryCard.vue";
@@ -71,6 +72,7 @@ function selectPreset(key: string): void {
 
     <p class="text-caption leading-relaxed text-muted-foreground">{{ TRAVEL_ASSUMPTION_NOTE }}</p>
     <TravelMetricGrid :items="metrics" />
+    <TravelCostBars title="통신 옵션 총비용 그래프" :rows="result.rows" />
     <AffiliateLinkPanel
       title="통신비 비교 후 같이 보는 준비물"
       description="eSIM 비용을 계산했다면 캐리어와 보조배터리 같은 출국 준비물도 함께 확인해 보세요."

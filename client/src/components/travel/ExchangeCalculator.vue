@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import AffiliateLinkPanel from "@/components/common/AffiliateLinkPanel.vue";
 import TravelMetricGrid from "@/components/travel/TravelMetricGrid.vue";
+import TravelCostBars from "@/components/travel/TravelCostBars.vue";
 import TravelRankTable from "@/components/travel/TravelRankTable.vue";
 import TravelScenarioChips from "@/components/travel/TravelScenarioChips.vue";
 import TravelSummaryCard from "@/components/travel/TravelSummaryCard.vue";
@@ -70,6 +71,7 @@ function selectPreset(key: string): void {
     </div>
 
     <TravelMetricGrid :items="metrics" />
+    <TravelCostBars title="환전 수수료 그래프" :rows="result.rows" />
     <AffiliateLinkPanel
       title="환전 전에 같이 확인해 볼 여행 용품"
       description="환전 수수료를 줄였다면 캐리어, eSIM, 보조배터리 가격도 함께 체크해 보세요."
