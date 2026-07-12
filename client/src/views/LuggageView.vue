@@ -5,6 +5,7 @@ import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import RelatedServices from "@/components/common/RelatedServices.vue";
 import LuggageCalculator from "@/components/travel/LuggageCalculator.vue";
+import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { LUGGAGE_SOURCES, TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
 
@@ -44,9 +45,11 @@ const faqJsonLd = {
     :json-ld="faqJsonLd"
   />
   <div class="text-resize-layout container space-y-5 py-5">
+    <CalculatorPageHeader title="LCC 수하물 예산 계산기" />
+
     <ShSurface padding="none" class="overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
-        <ShText as="h1" variant="heading">LCC 위탁수하물 예산 계산</ShText>
+        <ShText as="h2" variant="heading">수하물 조건 입력</ShText>
         <FreshBadge :message="TRAVEL_BADGE_MESSAGE" />
       </div>
       <div class="retro-panel-content space-y-4">

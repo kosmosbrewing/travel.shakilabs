@@ -3,6 +3,7 @@ import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
+import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import { useTravelExchangeRates } from "@/composables/useTravelExchangeRates";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { EXCHANGE_RATE_STATUS } from "@/data/exchangeRates";
@@ -42,9 +43,11 @@ const faqJsonLd = {
     :json-ld="faqJsonLd"
   />
   <div class="container space-y-5 py-5">
+    <CalculatorPageHeader title="환전 수수료 비교" />
+
     <div class="retro-panel overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
-        <h1 class="retro-title">환전 우대율별 수수료 비교</h1>
+        <h2 class="retro-title">환전 조건 입력</h2>
         <FreshBadge :message="badgeMessage" />
       </div>
       <div class="retro-panel-content space-y-4">
