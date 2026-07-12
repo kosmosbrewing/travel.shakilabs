@@ -48,7 +48,7 @@ function selectPreset(key: string): void {
 
         <div class="flex flex-wrap items-center gap-2">
           <button type="button" class="retro-panel px-3 py-2 text-caption font-semibold text-foreground" @click="reset">
-            기본값으로 초기화
+            입력 초기화
           </button>
           <p class="text-tiny text-muted-foreground">현찰 살 때 우대율만 반영한 단순 수수료 비교입니다.</p>
         </div>

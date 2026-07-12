@@ -26,7 +26,7 @@ defineProps<{
         <p class="text-tiny font-semibold uppercase tracking-widest text-primary">
           {{ leaderLabel }}
         </p>
-        <p class="mt-1.5 text-[1.75rem] font-bold leading-tight tracking-tight text-foreground sm:text-[2.125rem]">
+        <p class="travel-result-leader mt-1.5 font-bold tracking-tight text-foreground">
           {{ leaderValue }}
         </p>
         <p v-if="leaderHint" class="mt-1 text-caption text-muted-foreground">
@@ -67,7 +67,7 @@ defineProps<{
           <BarChart3 class="size-3.5" />
           입력 기준 요약
         </div>
-        <div class="travel-summary-fact-grid mt-2.5 grid grid-cols-3 gap-2">
+        <div class="travel-summary-fact-grid mt-2.5 grid grid-cols-1 gap-2 sm:grid-cols-3">
           <article
             v-for="fact in facts"
             :key="fact.label"
