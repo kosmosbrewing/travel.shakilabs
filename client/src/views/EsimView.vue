@@ -3,6 +3,7 @@ import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import EsimCalculator from "@/components/travel/EsimCalculator.vue";
+import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
 
@@ -39,9 +40,11 @@ const faqJsonLd = {
     :json-ld="faqJsonLd"
   />
   <div class="container space-y-5 py-5">
+    <CalculatorPageHeader title="eSIM·로밍·와이파이 비교" />
+
     <div class="retro-panel overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
-        <h1 class="retro-title">eSIM vs 로밍 vs 포켓와이파이</h1>
+        <h2 class="retro-title">통신 조건 입력</h2>
         <FreshBadge :message="TRAVEL_BADGE_MESSAGE" />
       </div>
       <div class="retro-panel-content space-y-4">
