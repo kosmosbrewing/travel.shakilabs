@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import AffiliateLinkPanel from "@/components/common/AffiliateLinkPanel.vue";
 import TravelMetricGrid from "@/components/travel/TravelMetricGrid.vue";
+import TravelCostBars from "@/components/travel/TravelCostBars.vue";
 import TravelRankTable from "@/components/travel/TravelRankTable.vue";
 import TravelScenarioChips from "@/components/travel/TravelScenarioChips.vue";
 import TravelSummaryCard from "@/components/travel/TravelSummaryCard.vue";
@@ -82,6 +83,7 @@ function selectPreset(key: string): void {
 
     <p class="text-caption leading-relaxed text-muted-foreground">{{ TRAVEL_ASSUMPTION_NOTE }}</p>
     <TravelMetricGrid :items="metrics" />
+    <TravelCostBars title="위탁수하물 총비용 그래프" :rows="result.rows" />
     <AffiliateLinkPanel
       title="출국 전에 같이 챙기는 여행 준비물"
       description="수하물 비용을 확인했다면 캐리어, eSIM, 보조배터리 가격도 함께 점검해 보세요."
