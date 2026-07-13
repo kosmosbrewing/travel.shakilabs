@@ -4,6 +4,7 @@ import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
+import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { useTravelExchangeRates } from "@/composables/useTravelExchangeRates";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { EXCHANGE_RATE_STATUS } from "@/data/exchangeRates";
@@ -58,6 +59,7 @@ const faqJsonLd = {
         <ExchangeCalculator />
       </div>
     </div>
+    <TravelNextActions current-tool="exchange" />
     <div class="retro-panel overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
         <h2 class="retro-title">자주 묻는 질문</h2>

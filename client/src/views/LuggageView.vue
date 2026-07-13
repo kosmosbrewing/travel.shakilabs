@@ -3,9 +3,9 @@ import { ShSurface, ShText } from "@shakilabs/ui";
 import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
-import RelatedServices from "@/components/common/RelatedServices.vue";
 import LuggageCalculator from "@/components/travel/LuggageCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
+import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { LUGGAGE_SOURCES, TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
 
@@ -68,6 +68,7 @@ const faqJsonLd = {
         </div>
       </div>
     </ShSurface>
+    <TravelNextActions current-tool="luggage" />
     <div class="retro-panel overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
         <h2 class="retro-title">자주 묻는 질문</h2>
@@ -87,7 +88,6 @@ const faqJsonLd = {
         </details>
       </div>
     </div>
-    <RelatedServices />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>
 </template>
