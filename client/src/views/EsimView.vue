@@ -4,6 +4,7 @@ import SEOHead from "@/components/common/SEOHead.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import EsimCalculator from "@/components/travel/EsimCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
+import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
 
@@ -52,6 +53,7 @@ const faqJsonLd = {
         <EsimCalculator />
       </div>
     </div>
+    <TravelNextActions current-tool="esim" />
     <div class="retro-panel overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
         <h2 class="retro-title">자주 묻는 질문</h2>
