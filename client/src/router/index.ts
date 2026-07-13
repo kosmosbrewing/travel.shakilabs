@@ -10,6 +10,12 @@ export const routes: RouteRecordRaw[] = [
     redirect: "/luggage",
   },
   {
+    path: "/all",
+    name: "AllTools",
+    component: () => import("@/views/TravelToolsView.vue"),
+    meta: { title: "여행 계산기 전체 보기 | 수하물·통신·환전 도구" },
+  },
+  {
     path: "/luggage",
     name: "Luggage",
     component: () => import("@/views/LuggageView.vue"),

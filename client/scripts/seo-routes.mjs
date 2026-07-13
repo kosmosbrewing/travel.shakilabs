@@ -1,4 +1,5 @@
 export const SEO_ROUTE_CONFIGS = [
+  { path: "/all", changefreq: "weekly", priority: "0.9" },
   { path: "/luggage", changefreq: "weekly", priority: "1.0" },
   { path: "/esim", changefreq: "weekly", priority: "0.9" },
   { path: "/exchange", changefreq: "weekly", priority: "0.9" },

@@ -5,17 +5,21 @@ import {
   ShPrimaryNavigation,
   type PrimaryNavigationItem,
 } from "@shakilabs/ui";
+import { TRAVEL_TOOLS } from "@/data/travelNavigation";
 
 const route = useRoute();
 const tabs: readonly PrimaryNavigationItem[] = [
-  { key: "luggage", label: "수하물", to: "/luggage" },
-  { key: "esim", label: "eSIM 비교", to: "/esim" },
-  { key: "exchange", label: "환전 수수료", to: "/exchange" },
+  { key: "all", label: "여행 도구", to: "/all" },
+  ...TRAVEL_TOOLS.map((tool) => ({
+    key: tool.key,
+    label: tool.navigationLabel,
+    to: tool.path,
+  })),
 ];
 
-const activeItem = computed(() =>
-  tabs.find((item) => route.path === item.to),
-);
+const activeItem = computed(() => tabs.find((item) =>
+  route.path === item.to || route.path.startsWith(`${item.to}/`),
+));
 </script>
 
 <template>
@@ -23,5 +27,6 @@ const activeItem = computed(() =>
     :items="tabs"
     :active-key="activeItem?.key"
     :link-component="RouterLink"
+    :mobile-columns="2"
   />
 </template>
