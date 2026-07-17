@@ -2,6 +2,7 @@
 import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import FaqAccordionPanel from "@/components/common/FaqAccordionPanel.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
+import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
@@ -9,6 +10,7 @@ import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { useTravelExchangeRates } from "@/composables/useTravelExchangeRates";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { EXCHANGE_RATE_STATUS } from "@/data/exchangeRates";
+import { EXCHANGE_GUIDE } from "@/data/seoGuides";
 
 const { badgeMessage } = useTravelExchangeRates();
 
@@ -62,6 +64,13 @@ const faqJsonLd = {
     </div>
     <TravelNextActions current-tool="exchange" />
     <FaqAccordionPanel :items="faqItems" />
+    <SeoRichGuide
+      :title="EXCHANGE_GUIDE.title"
+      :intro="EXCHANGE_GUIDE.intro"
+      :sections="EXCHANGE_GUIDE.sections"
+      :faqs="EXCHANGE_GUIDE.faqs"
+      :disclaimer="EXCHANGE_GUIDE.disclaimer"
+    />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>
 </template>

@@ -3,12 +3,14 @@ import { ShSurface, ShText } from "@shakilabs/ui";
 import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import FaqAccordionPanel from "@/components/common/FaqAccordionPanel.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
+import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import LuggageCalculator from "@/components/travel/LuggageCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { LUGGAGE_SOURCES, TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
+import { LUGGAGE_GUIDE } from "@/data/seoGuides";
 
 const faqItems = [
   {
@@ -71,6 +73,13 @@ const faqJsonLd = {
     </ShSurface>
     <TravelNextActions current-tool="luggage" />
     <FaqAccordionPanel :items="faqItems" />
+    <SeoRichGuide
+      :title="LUGGAGE_GUIDE.title"
+      :intro="LUGGAGE_GUIDE.intro"
+      :sections="LUGGAGE_GUIDE.sections"
+      :faqs="LUGGAGE_GUIDE.faqs"
+      :disclaimer="LUGGAGE_GUIDE.disclaimer"
+    />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>
 </template>

@@ -3,7 +3,9 @@ import { ArrowRight } from "lucide-vue-next";
 import { RouterLink } from "vue-router";
 import { ShSurface, ShText } from "@shakilabs/ui";
 import SEOHead from "@/components/common/SEOHead.vue";
+import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
 import { TRAVEL_TOOLS } from "@/data/travelNavigation";
+import { TRAVEL_HOME_GUIDE } from "@/data/seoGuides";
 </script>
 
 <template>
@@ -39,5 +41,13 @@ import { TRAVEL_TOOLS } from "@/data/travelNavigation";
         </RouterLink>
       </div>
     </section>
+
+    <SeoRichGuide
+      :title="TRAVEL_HOME_GUIDE.title"
+      :intro="TRAVEL_HOME_GUIDE.intro"
+      :sections="TRAVEL_HOME_GUIDE.sections"
+      :faqs="TRAVEL_HOME_GUIDE.faqs"
+      :disclaimer="TRAVEL_HOME_GUIDE.disclaimer"
+    />
   </div>
 </template>
