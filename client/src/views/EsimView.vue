@@ -2,12 +2,14 @@
 import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import FaqAccordionPanel from "@/components/common/FaqAccordionPanel.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
+import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import EsimCalculator from "@/components/travel/EsimCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
+import { ESIM_GUIDE } from "@/data/seoGuides";
 
 const faqItems = [
   {
@@ -56,6 +58,13 @@ const faqJsonLd = {
     </div>
     <TravelNextActions current-tool="esim" />
     <FaqAccordionPanel :items="faqItems" />
+    <SeoRichGuide
+      :title="ESIM_GUIDE.title"
+      :intro="ESIM_GUIDE.intro"
+      :sections="ESIM_GUIDE.sections"
+      :faqs="ESIM_GUIDE.faqs"
+      :disclaimer="ESIM_GUIDE.disclaimer"
+    />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>
 </template>
