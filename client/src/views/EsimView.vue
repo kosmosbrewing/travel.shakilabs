@@ -6,6 +6,7 @@ import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import EsimCalculator from "@/components/travel/EsimCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
+import CalculatorInteractionTracker from "@/components/analytics/CalculatorInteractionTracker.vue";
 import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
@@ -53,7 +54,9 @@ const faqJsonLd = {
       </div>
       <div class="retro-panel-content space-y-4">
         <p class="text-caption leading-relaxed text-muted-foreground">혼자 가는지, 여럿이 가는지에 따라 가장 싼 통신 옵션이 달라집니다. 총 데이터 사용량까지 함께 넣어 바로 비교하세요.</p>
-        <EsimCalculator />
+        <CalculatorInteractionTracker calculator-id="esim" page-path="/travel/esim">
+          <EsimCalculator />
+        </CalculatorInteractionTracker>
       </div>
     </div>
     <TravelNextActions current-tool="esim" />

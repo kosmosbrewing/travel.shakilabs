@@ -6,6 +6,7 @@ import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
 import FreshBadge from "@/components/common/FreshBadge.vue";
 import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
+import CalculatorInteractionTracker from "@/components/analytics/CalculatorInteractionTracker.vue";
 import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { useTravelExchangeRates } from "@/composables/useTravelExchangeRates";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
@@ -59,7 +60,9 @@ const faqJsonLd = {
         <p class="rounded-lg border border-border bg-muted/30 px-3 py-2 text-caption leading-relaxed text-muted-foreground">
           환율 출처: {{ EXCHANGE_RATE_STATUS.source }}
         </p>
-        <ExchangeCalculator />
+        <CalculatorInteractionTracker calculator-id="exchange" page-path="/travel/exchange">
+          <ExchangeCalculator />
+        </CalculatorInteractionTracker>
       </div>
     </div>
     <TravelNextActions current-tool="exchange" />
