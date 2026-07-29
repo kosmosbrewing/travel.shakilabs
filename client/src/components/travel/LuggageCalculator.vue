@@ -13,11 +13,9 @@ import { formatWon } from "@/lib/utils";
 
 const { state, result, applyPreset, reset } = useLuggageCalculator();
 
+// 요약 카드가 최저가·차이·가방 수를 이미 보여주므로, 지표 그리드는 겹치지 않는 값만 남긴다
 const metrics = computed(() => [
-  { label: "가장 저렴한 총액", value: formatWon(result.value.cheapest.totalCost), helper: result.value.cheapest.name },
   { label: "가장 비싼 총액", value: formatWon(result.value.priciest.totalCost), helper: result.value.priciest.name },
-  { label: "옵션 간 차이", value: formatWon(result.value.spread), helper: "최저가와 최고가 차이" },
-  { label: "총 맡길 가방", value: `${result.value.totalCheckedBags}개`, helper: "왕복 구간 포함" },
 ]);
 
 function selectPreset(key: string): void {
@@ -75,8 +73,8 @@ function selectPreset(key: string): void {
         delta-label="가장 비싼 옵션 대비 차이"
         :facts="[
           { label: '최저가 총액', value: formatWon(result.cheapest.totalCost) },
+          { label: '가장 비싼 총액', value: formatWon(result.priciest.totalCost) },
           { label: '총 수하물 수', value: `${result.totalCheckedBags}개` },
-          { label: '적용 무게', value: `${state.bagWeightKg}kg` },
         ]"
       />
     </div>
@@ -84,6 +82,7 @@ function selectPreset(key: string): void {
     <p class="text-caption leading-relaxed text-muted-foreground">{{ TRAVEL_ASSUMPTION_NOTE }}</p>
     <TravelMetricGrid :items="metrics" />
     <TravelCostBars title="위탁수하물 총비용 그래프" :rows="result.rows" />
+
     <AffiliateLinkPanel
       title="출국 전에 같이 챙기는 여행 준비물"
       description="수하물 비용을 확인했다면 캐리어, eSIM, 보조배터리 가격도 함께 점검해 보세요."
