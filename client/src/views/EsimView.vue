@@ -60,13 +60,11 @@ const faqJsonLd = {
       </div>
     </div>
     <TravelNextActions current-tool="esim" />
-    <FaqAccordionPanel :items="faqItems" />
+    <FaqAccordionPanel :items="faqItems" :extra="ESIM_GUIDE.faqs" />
     <SeoRichGuide
       :title="ESIM_GUIDE.title"
       :intro="ESIM_GUIDE.intro"
-      :sections="ESIM_GUIDE.sections"
-      :faqs="ESIM_GUIDE.faqs"
-      :disclaimer="ESIM_GUIDE.disclaimer"
+      :sections="ESIM_GUIDE.sections"      :disclaimer="ESIM_GUIDE.disclaimer"
     />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>

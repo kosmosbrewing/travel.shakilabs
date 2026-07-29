@@ -66,13 +66,11 @@ const faqJsonLd = {
       </div>
     </div>
     <TravelNextActions current-tool="exchange" />
-    <FaqAccordionPanel :items="faqItems" />
+    <FaqAccordionPanel :items="faqItems" :extra="EXCHANGE_GUIDE.faqs" />
     <SeoRichGuide
       :title="EXCHANGE_GUIDE.title"
       :intro="EXCHANGE_GUIDE.intro"
-      :sections="EXCHANGE_GUIDE.sections"
-      :faqs="EXCHANGE_GUIDE.faqs"
-      :disclaimer="EXCHANGE_GUIDE.disclaimer"
+      :sections="EXCHANGE_GUIDE.sections"      :disclaimer="EXCHANGE_GUIDE.disclaimer"
     />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>

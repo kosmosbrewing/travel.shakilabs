@@ -75,13 +75,11 @@ const faqJsonLd = {
       </div>
     </ShSurface>
     <TravelNextActions current-tool="luggage" />
-    <FaqAccordionPanel :items="faqItems" />
+    <FaqAccordionPanel :items="faqItems" :extra="LUGGAGE_GUIDE.faqs" />
     <SeoRichGuide
       :title="LUGGAGE_GUIDE.title"
       :intro="LUGGAGE_GUIDE.intro"
-      :sections="LUGGAGE_GUIDE.sections"
-      :faqs="LUGGAGE_GUIDE.faqs"
-      :disclaimer="LUGGAGE_GUIDE.disclaimer"
+      :sections="LUGGAGE_GUIDE.sections"      :disclaimer="LUGGAGE_GUIDE.disclaimer"
     />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>
