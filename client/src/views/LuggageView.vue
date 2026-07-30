@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ShSurface, ShText } from "@shakilabs/ui";
+import { mergeFaqs } from "@/lib/faqMerge";
 import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import FaqAccordionPanel from "@/components/common/FaqAccordionPanel.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
@@ -28,10 +29,12 @@ const faqItems = [
   },
 ] as const;
 
+// 화면에 실제 렌더되는 병합 FAQ와 구조화 데이터를 일치시킨다 (스키마 규칙)
+const mergedFaqs = mergeFaqs(faqItems, LUGGAGE_GUIDE.faqs);
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faqItems.map((faq) => ({
+  mainEntity: mergedFaqs.map((faq) => ({
     "@type": "Question",
     name: faq.q,
     acceptedAnswer: {
@@ -75,7 +78,7 @@ const faqJsonLd = {
       </div>
     </ShSurface>
     <TravelNextActions current-tool="luggage" />
-    <FaqAccordionPanel :items="faqItems" :extra="LUGGAGE_GUIDE.faqs" />
+    <FaqAccordionPanel :items="mergedFaqs" />
     <SeoRichGuide
       :title="LUGGAGE_GUIDE.title"
       :intro="LUGGAGE_GUIDE.intro"
