@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { mergeFaqs } from "@/lib/faqMerge";
 import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import FaqAccordionPanel from "@/components/common/FaqAccordionPanel.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
@@ -30,10 +31,12 @@ const faqItems = [
   },
 ] as const;
 
+// 화면에 실제 렌더되는 병합 FAQ와 구조화 데이터를 일치시킨다 (스키마 규칙)
+const mergedFaqs = mergeFaqs(faqItems, EXCHANGE_GUIDE.faqs);
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: faqItems.map((faq) => ({
+  mainEntity: mergedFaqs.map((faq) => ({
     "@type": "Question",
     name: faq.q,
     acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -66,7 +69,7 @@ const faqJsonLd = {
       </div>
     </div>
     <TravelNextActions current-tool="exchange" />
-    <FaqAccordionPanel :items="faqItems" :extra="EXCHANGE_GUIDE.faqs" />
+    <FaqAccordionPanel :items="mergedFaqs" />
     <SeoRichGuide
       :title="EXCHANGE_GUIDE.title"
       :intro="EXCHANGE_GUIDE.intro"
