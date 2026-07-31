@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { ShBulletProgress } from "@shakilabs/ui";
 import AffiliateLinkPanel from "@/components/common/AffiliateLinkPanel.vue";
 import TravelMetricGrid from "@/components/travel/TravelMetricGrid.vue";
 import TravelCostBars from "@/components/travel/TravelCostBars.vue";
@@ -81,6 +82,14 @@ function selectPreset(key: string): void {
 
     <p class="text-caption leading-relaxed text-muted-foreground">{{ TRAVEL_ASSUMPTION_NOTE }}</p>
     <TravelMetricGrid :items="metrics" />
+    <ShBulletProgress
+      label="가장 비싼 시나리오 대비 최저가 비중"
+      :value="result.cheapest.totalCost"
+      :limit="result.priciest.totalCost"
+      :format-value="formatWon"
+      limit-label="가장 비싼 옵션"
+      note="막대 전체는 가장 비싼 예산 시나리오 총액이며, 채워진 구간이 가장 낮은 예산 시나리오가 차지하는 비중입니다."
+    />
     <TravelCostBars title="위탁수하물 총비용 그래프" :rows="result.rows" />
 
     <AffiliateLinkPanel
