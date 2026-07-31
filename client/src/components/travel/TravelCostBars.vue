@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, useId } from "vue";
 import { formatWon } from "@/lib/utils";
-import { positiveBarWidth } from "@/utils/chartMath";
+// 막대 폭 계산은 @shakilabs/ui 공용 차트 수학으로 일원화 (로컬 chartMath 중복 제거)
+import { positiveBarWidth } from "@shakilabs/ui";
 import type { RankedCostRow } from "@/utils/calculator";
 
 const props = defineProps<{
