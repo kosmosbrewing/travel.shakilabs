@@ -36,3 +36,17 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Generate production SBOM
+        run: npm run sbom:prod
+
+      # 재생성 후 diff가 아니라 신원 필드만 대조한다. timestamp·UUID·npm CLI 버전 같은
+      # 비결정적 필드를 비교하면 상시 red가 되므로, 남의 앱 SBOM·잘못된 벤더 기록만 잡는다.
+      - name: Verify vendored artifacts
+        run: npm run verify:supply-chain
+
+      - name: Upload SBOM artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-sbom
+          path: client/artifacts/sbom/*.json
