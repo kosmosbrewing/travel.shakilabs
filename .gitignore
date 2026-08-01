@@ -6,6 +6,11 @@ client/node_modules/
 dist/
 client/dist/
 
+# Generated build artifacts (SBOM 등). 커밋하면 timestamp·UUID 때문에 매번 diff가 나고,
+# 스캐폴딩 복사 시 남의 앱 SBOM이 그대로 딸려 들어가는 사고가 실제로 있었다.
+# 릴리스별 SBOM은 CI의 upload-artifact로 보관한다.
+client/artifacts/
+
 # Environment variables
 .env
 .env.local
