@@ -3,12 +3,15 @@
 export interface GuideSection { h2: string; body: string; }
 export interface GuideFaq { q: string; a: string; }
 export interface GuideChecklist { title: string; items: string[]; }
+// 공공기관 공식 출처 링크 — 콘텐츠 신뢰도(E-E-A-T) 근거로 가이드 하단에 노출한다
+export interface GuideSource { label: string; url: string; }
 export interface GuideData {
   title: string;
   intro: string;
   sections?: GuideSection[];
   faqs?: GuideFaq[];
   checklist?: GuideChecklist;
+  sources?: GuideSource[];
   disclaimer?: string;
 }
 
@@ -138,6 +141,16 @@ export const ESIM_GUIDE: GuideData = {
       a: "eSIM은 대부분 같은 상품을 추가 구매해 새 QR코드로 개통하는 방식으로 연장합니다. 로밍은 통신사 앱에서 요금제를 추가 신청할 수 있습니다. 현지에서 급하게 사면 선택지가 좁아지므로, 처음부터 사용량을 여유 있게 잡는 편이 결과적으로 저렴한 경우가 많습니다.",
     },
   ],
+  sources: [
+    {
+      label: "외교부 해외안전여행 (국가·지역별 여행 정보와 현지 통신·안전 안내)",
+      url: "https://www.0404.go.kr",
+    },
+    {
+      label: "인천국제공항 (출국 절차와 통신사 로밍 카운터 안내)",
+      url: "https://www.airport.kr",
+    },
+  ],
   disclaimer: COMMON_DISCLAIMER,
 };
 
@@ -199,6 +212,16 @@ export const EXCHANGE_GUIDE: GuideData = {
     {
       q: "환전 금액이 크면 신고가 필요한가요?",
       a: "해외로 미화 1만 달러 상당액을 초과하는 지급수단을 휴대 반출할 때는 세관 신고 의무가 있습니다. 고액 환전 자체도 은행에서 증빙을 요구할 수 있으므로, 큰 금액이 필요한 경우 카드·송금 등 다른 수단과 나누는 것을 검토하고 자세한 기준은 관세청·거래 은행에서 확인하세요.",
+    },
+  ],
+  sources: [
+    {
+      label: "관세청 (여행자 휴대품 면세 한도·외화 반출 신고 기준)",
+      url: "https://www.customs.go.kr",
+    },
+    {
+      label: "인천국제공항 (공항 내 은행·환전소 위치와 운영 안내)",
+      url: "https://www.airport.kr",
     },
   ],
   disclaimer: COMMON_DISCLAIMER,

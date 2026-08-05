@@ -73,7 +73,9 @@ const faqJsonLd = {
     <SeoRichGuide
       :title="EXCHANGE_GUIDE.title"
       :intro="EXCHANGE_GUIDE.intro"
-      :sections="EXCHANGE_GUIDE.sections"      :disclaimer="EXCHANGE_GUIDE.disclaimer"
+      :sections="EXCHANGE_GUIDE.sections"
+      :sources="EXCHANGE_GUIDE.sources"
+      :disclaimer="EXCHANGE_GUIDE.disclaimer"
     />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>
