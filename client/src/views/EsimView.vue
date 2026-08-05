@@ -67,7 +67,9 @@ const faqJsonLd = {
     <SeoRichGuide
       :title="ESIM_GUIDE.title"
       :intro="ESIM_GUIDE.intro"
-      :sections="ESIM_GUIDE.sections"      :disclaimer="ESIM_GUIDE.disclaimer"
+      :sections="ESIM_GUIDE.sections"
+      :sources="ESIM_GUIDE.sources"
+      :disclaimer="ESIM_GUIDE.disclaimer"
     />
     <AffiliateDisclosure v-if="travelAffiliateItems.length > 0" />
   </div>

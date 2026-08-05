@@ -46,6 +46,17 @@ const constantsStore = useConstantsStore();
           본 서비스는 빠른 의사결정을 돕기 위한 참고용 도구이며, 최종 예약 전 공식 페이지 확인이 필요합니다.
         </p>
 
+        <h2 class="text-heading font-bold">운영자 정보와 검증 방식</h2>
+        <div class="retro-panel-muted space-y-2 p-4">
+          <p class="text-body font-bold">운영: ShakiLabs · 문의: skdba1313@gmail.com</p>
+          <p class="text-body text-muted-foreground">
+            수하물 요금과 eSIM·로밍 요금 가정값은 각 항공사·통신사의 공식 요금 페이지와
+            대조해 검증하고, 환전 비교는 은행 공시 우대율 구조를 기준으로 구성하며,
+            기준이 바뀌면 확인일을 명시해 갱신합니다. 오류 제보를 보내주시면 확인 후
+            신속히 반영합니다.
+          </p>
+        </div>
+
         <h2 class="text-heading font-bold">문의</h2>
         <p class="text-body text-muted-foreground">
           오류 제보나 기능 건의는
