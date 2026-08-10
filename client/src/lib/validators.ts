@@ -1,13 +1,55 @@
 import { z } from "zod";
 
-const travelerSchema = z.coerce.number().int().min(1).max(8);
-const bagSchema = z.coerce.number().int().min(1).max(3);
-const baggageWeightSchema = z.union([z.literal(15), z.literal(20), z.literal(25)]);
-const tripSegmentSchema = z.coerce.number().int().min(1).max(2);
-const tripDaySchema = z.coerce.number().int().min(1).max(30);
-const dataSchema = z.coerce.number().int().min(1).max(120);
-const amountSchema = z.coerce.number().int().min(100_000).max(10_000_000);
-const currencySchema = z.enum(["USD", "JPY", "EUR"]);
+// 허용 범위를 스키마 바깥에 두는 이유: /about이 "이 계산기가 실제로 받는 입력"을
+// 문장으로 설명하는데, 숫자를 그쪽에 따로 적으면 스키마와 조용히 어긋난다.
+// 소개 글과 검증 규칙이 같은 상수를 보게 해서 한쪽만 바뀌는 사고를 막는다.
+export const INPUT_BOUNDS = {
+  travelers: { min: 1, max: 8 },
+  bagsPerTraveler: { min: 1, max: 3 },
+  bagWeightKg: [15, 20, 25],
+  tripSegments: { min: 1, max: 2 },
+  tripDays: { min: 1, max: 30 },
+  totalDataGb: { min: 1, max: 120 },
+  amountKrw: { min: 100_000, max: 10_000_000 },
+  currencies: ["USD", "JPY", "EUR"],
+} as const;
+
+const travelerSchema = z.coerce
+  .number()
+  .int()
+  .min(INPUT_BOUNDS.travelers.min)
+  .max(INPUT_BOUNDS.travelers.max);
+const bagSchema = z.coerce
+  .number()
+  .int()
+  .min(INPUT_BOUNDS.bagsPerTraveler.min)
+  .max(INPUT_BOUNDS.bagsPerTraveler.max);
+const baggageWeightSchema = z.union([
+  z.literal(INPUT_BOUNDS.bagWeightKg[0]),
+  z.literal(INPUT_BOUNDS.bagWeightKg[1]),
+  z.literal(INPUT_BOUNDS.bagWeightKg[2]),
+]);
+const tripSegmentSchema = z.coerce
+  .number()
+  .int()
+  .min(INPUT_BOUNDS.tripSegments.min)
+  .max(INPUT_BOUNDS.tripSegments.max);
+const tripDaySchema = z.coerce
+  .number()
+  .int()
+  .min(INPUT_BOUNDS.tripDays.min)
+  .max(INPUT_BOUNDS.tripDays.max);
+const dataSchema = z.coerce
+  .number()
+  .int()
+  .min(INPUT_BOUNDS.totalDataGb.min)
+  .max(INPUT_BOUNDS.totalDataGb.max);
+const amountSchema = z.coerce
+  .number()
+  .int()
+  .min(INPUT_BOUNDS.amountKrw.min)
+  .max(INPUT_BOUNDS.amountKrw.max);
+const currencySchema = z.enum(INPUT_BOUNDS.currencies);
 
 export const luggageInputSchema = z.object({
   travelers: travelerSchema,
