@@ -11,7 +11,9 @@ export const badgeVariants = cva(
         outline: "text-foreground",
         deduction: "border-transparent bg-deduction text-deduction-foreground",
         highlight: "border-transparent bg-highlight text-highlight-foreground",
-        neutral: "border-border/50 bg-muted-foreground/70 text-white",
+        // muted-foreground/70 위의 흰 글씨는 라이트 3.37:1 · 다크 3.46:1로 양쪽 다 미달이었다.
+        // 알파를 걷고 배경 토큰을 글자색으로 뒤집어 라이트 6.51:1 · 다크 8.64:1 확보.
+        neutral: "border-border/50 bg-muted-foreground text-background",
         profit: "border-transparent bg-profit/12 text-profit",
       },
     },

@@ -64,6 +64,10 @@
       })();
     </script>
     <style>
+      /* 브랜드 hue(38 = travel 앰버)는 DESIGN_TOKENS.md §2가 대장이므로 건드리지 않는다.
+         아래에서 조정한 것은 의미색(profit/fee/destructive)뿐이며, 전부 WCAG AA 4.5:1
+         미달을 실측해 올린 값이다. foreground 짝은 배경을 바꾸면 같이 뒤집어야 한다 —
+         다크에서 밝은 배경 위에 흰 글씨가 남으면 2:1대로 떨어진다. */
       :root {
         --background: 210 40% 98%;
         --foreground: 222 47% 11%;
@@ -79,15 +83,15 @@
         --accent-foreground: 35 82% 35%;
         --popover: 0 0% 100%;
         --popover-foreground: 222 47% 11%;
-        --destructive: 0 72% 52%;
+        --destructive: 0 74% 42%;
         --destructive-foreground: 210 40% 98%;
         --border: 214 16% 85%;
         --input: 214 16% 85%;
         --ring: 38 90% 28%;
         --radius: 0.4rem;
-        --profit: 148 61% 36%;
+        --profit: 142 64% 24%;
         --profit-foreground: 0 0% 100%;
-        --fee: 0 72% 52%;
+        --fee: 0 74% 42%;
         --fee-foreground: 0 0% 100%;
       }
 
@@ -106,15 +110,15 @@
         --accent-foreground: 38 75% 82%;
         --popover: 217 33% 17%;
         --popover-foreground: 210 40% 96%;
-        --destructive: 0 72% 58%;
-        --destructive-foreground: 0 0% 100%;
+        --destructive: 0 75% 72%;
+        --destructive-foreground: 0 60% 10%;
         --border: 214 16% 26%;
         --input: 214 16% 30%;
         --ring: 38 88% 57%;
         --profit: 148 63% 66%;
-        --profit-foreground: 0 0% 100%;
-        --fee: 0 62% 58%;
-        --fee-foreground: 0 0% 100%;
+        --profit-foreground: 148 70% 10%;
+        --fee: 0 75% 72%;
+        --fee-foreground: 0 60% 10%;
       }
 
       html {
