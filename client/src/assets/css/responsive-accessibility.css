@@ -5,8 +5,10 @@
   line-height: 1.4;
 }
 
+/* white 하드코딩 대신 짝 토큰을 쓴다. 라이트 --primary-foreground는 흰색이라 렌더 결과는
+   동일하지만(6.07:1), 브랜드 색을 손대도 글자색이 따라오지 않는 사고를 막는다. */
 :root:not(.dark) nav[aria-label="주요 메뉴"] a {
-  color: white;
+  color: hsl(var(--primary-foreground));
 }
 
 .tabular-nums {

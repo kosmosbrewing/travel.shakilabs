@@ -41,14 +41,19 @@
 @tailwind utilities;
 
 @layer base {
+  /* 의미색은 본문 텍스트로도 쓰이므로(@shakilabs/ui가 --sh-color-success/warning/danger를
+     color: 로 소비) 라이트 모드는 WCAG AA 4.5:1을 넘겨야 한다. 아래 값은 finance·house가
+     이미 쓰는 통과값과 동일하게 맞춘 것 — 앱마다 다른 리터럴이 돌아다니면 재발한다.
+     측정 기준: --background 210 40% 98% / --card 0 0% 100% / --muted 210 40% 96% */
   :root {
-    --status-success: 148 61% 36%;
-    --status-warning: 43 88% 43%;
-    --status-caution: 28 82% 48%;
-    --status-danger: 0 70% 52%;
-    --status-info: 212 83% 45%;
+    --status-success: 142 64% 24%; /* 3.69:1 -> 6.87:1 */
+    --status-warning: 24 83% 31%; /* 2.48:1 -> 6.73:1 (대형 텍스트 3:1도 미달이었음) */
+    --status-caution: 17 79% 34%; /* 3.03:1 -> 6.70:1 */
+    --status-danger: 0 74% 42%; /* muted 배경에서 4.31:1 -> 5.84:1 */
+    --status-info: 212 83% 45%; /* 4.87:1 통과 — 불필요한 시각 변화를 피해 유지 */
   }
 
+  /* 다크 의미색은 전부 5.8:1 이상으로 이미 통과 — 실측 후 의도적으로 유지한다 */
   .dark {
     --status-success: 148 63% 66%;
     --status-warning: 43 95% 70%;
