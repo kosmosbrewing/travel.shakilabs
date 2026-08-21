@@ -9,10 +9,13 @@ const constantsStore = useConstantsStore();
 const year = new Date().getFullYear();
 const SUPPORT_EMAIL = constantsStore.supportEmail;
 
+// 블로그는 root(shakilabs.com/blog) 소유라 travel 라우터에 없다. href를 주면
+// ShSiteFooter가 RouterLink 대신 <a href>로 렌더해 /travel/blog로 깨지지 않는다.
 const policyLinks = [
   { to: "/about", label: "사이트 안내" },
   { to: "/terms", label: "이용약관" },
   { to: "/privacy", label: "개인정보 처리방침" },
+  { to: "", href: "/blog", label: "블로그" },
   { to: "", href: `mailto:${SUPPORT_EMAIL}`, label: "문의" },
 ];
 
