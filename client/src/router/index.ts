@@ -6,8 +6,13 @@ import { useAuthStore } from "@/stores/auth";
 
 export const routes: RouteRecordRaw[] = [
   {
+    // 리다이렉트였던 시절 "/"는 /luggage의 복제본으로 프리렌더되어 canonical이
+    // /travel/luggage를 가리켰고, 그래서 사이트맵에서도 정당하게 빠져 있었다. 앱에서
+    // 가장 권위 높은 URL이 색인 후보에서 통째로 누락된 상태였다.
+    // 홈이 자기 화면을 가져야 self-canonical이 된다.
     path: "/",
-    redirect: "/luggage",
+    name: "Home",
+    component: () => import("@/views/HomeView.vue"),
   },
   {
     path: "/all",
