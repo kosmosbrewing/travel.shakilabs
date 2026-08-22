@@ -54,7 +54,10 @@ export default defineConfig({
   },
   ssgOptions: {
     includedRoutes() {
-      return ["/", ...SEO_ROUTES, "/404"];
+      // "/"를 여기서 따로 붙이지 않는다. 프리렌더 목록에만 홈을 특별 취급하고
+      // 사이트맵 목록(SEO_ROUTE_CONFIGS)에는 넣지 않은 것이 홈이 라이브 200인데도
+      // 사이트맵에서 빠져 있던 원인이었다. 두 목록의 출처를 하나로 유지한다.
+      return [...SEO_ROUTES, "/404"];
     },
   },
 });

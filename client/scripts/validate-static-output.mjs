@@ -15,7 +15,16 @@ function assert(condition, message) {
 }
 
 function routeOutputPath(route) {
-  return resolve(distRoot, `${route.slice(1)}.html`);
+  // vite-ssg는 홈을 dist/.html이 아니라 dist/index.html로 낸다
+  return route === "/"
+    ? resolve(distRoot, "index.html")
+    : resolve(distRoot, `${route.slice(1)}.html`);
+}
+
+// cleanUrls가 "/travel/"를 "/travel"로 리다이렉트하므로 홈은 어디서나 슬래시 없이
+// 주소를 잡는다: canonical, og:url, 사이트맵 loc 모두 같은 형태여야 한다.
+function canonicalUrlFor(route) {
+  return route === "/" ? canonicalBase : `${canonicalBase}${route}`;
 }
 
 function readCanonical(html) {
@@ -54,7 +63,7 @@ function validateRoute(route) {
   assert(existsSync(outputPath), `Missing static output for ${route}: ${outputPath}`);
 
   const html = readFileSync(outputPath, "utf8");
-  const expectedCanonical = `${canonicalBase}${route}`;
+  const expectedCanonical = canonicalUrlFor(route);
   const h1Count = html.match(/<h1\b/gi)?.length ?? 0;
 
   assert(readCanonical(html) === expectedCanonical,
@@ -94,19 +103,90 @@ function validatePolicyDisclosures() {
   }
 }
 
+function readSitemapUrls() {
+  const sitemapPath = resolve(distRoot, "sitemap.xml");
+  assert(existsSync(sitemapPath), `Missing sitemap output: ${sitemapPath}`);
+
+  const sitemap = readFileSync(sitemapPath, "utf8");
+  return [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+}
+
+// 사이트맵 = SEO_ROUTES 전수, 순서까지 동일해야 한다.
+function validateSitemap(actualUrls) {
+  const expectedUrls = SEO_ROUTES.map(canonicalUrlFor);
+
+  assert(JSON.stringify(actualUrls) === JSON.stringify(expectedUrls),
+    "Sitemap must list exactly the SEO routes");
+}
+
+// 라우터에 선언된 경로를 뜯어 { path, redirect } 목록으로 돌려준다.
+// 라우터 파일이 진실의 원천이라 소스를 직접 읽는다 — SEO_ROUTE_CONFIGS는 사람이 손으로
+// 맞추는 사본이고, 이번 결함이 바로 그 사본이 원본과 어긋난 사고였다.
+function parseRouterRoutes(source) {
+  const body = source.slice(source.indexOf("export const routes"));
+  const marks = [...body.matchAll(/path:\s*"([^"]+)"/g)].map((match) => ({
+    path: match[1],
+    index: match.index,
+  }));
+
+  return marks.map((mark, i) => ({
+    path: mark.path,
+    // 다음 path: 선언 전까지가 이 라우트의 본문이다
+    redirect: /redirect:/.test(body.slice(mark.index, marks[i + 1]?.index ?? body.length)),
+  }));
+}
+
+// 회귀 게이트: 라우터에 등록된 정적 라우트(특히 인덱스 라우트)가 사이트맵에 있는가.
+//
+// 왜 필요한가: "/"가 SEO_ROUTE_CONFIGS에서 빠져 있어도 빌드는 통과했고, 프리렌더도 됐고,
+// 라이브도 200을 돌려줬다. 사이트맵에서만 조용히 사라져 앱에서 가장 권위 높은 URL이
+// 색인 후보 밖에 있었다. 사람 눈으로 XML을 세는 것 말고는 잡을 방법이 없던 결함이다.
+//
+// 양방향인 이유: 리다이렉트 라우트는 자기 화면이 없어 다른 페이지로 canonical 통합되므로
+// 사이트맵에 실으면 안 된다. "홈을 넣어라"만 검사하면 홈을 리다이렉트로 되돌린 뒤
+// 사이트맵에만 URL을 남기는, 더 나쁜 모순 상태를 통과시키게 된다.
+function validateRouterRoutesAreListed(sitemapUrls) {
+  const routerSource = readFileSync(
+    resolve(projectRoot, "src", "router", "index.ts"),
+    "utf8"
+  );
+  const routerRoutes = parseRouterRoutes(routerSource);
+  const indexRoute = routerRoutes.find((route) => route.path === "/");
+
+  assert(indexRoute, "router/index.ts must register an index route");
+  assert(!indexRoute.redirect,
+    "Index route must render its own view: a redirect home canonicalizes to the "
+      + "target page, and a page that points its canonical elsewhere cannot be listed");
+
+  for (const route of routerRoutes) {
+    // 파라미터·캐치올 라우트는 정적 URL이 아니고, 리다이렉트는 위 규칙대로 제외한다
+    if (route.redirect || route.path.includes(":")) continue;
+    assert(sitemapUrls.has(canonicalUrlFor(route.path)),
+      `Router route is missing from the sitemap: ${canonicalUrlFor(route.path)}`);
+  }
+}
+
 validateVercelConfig(resolve(repositoryRoot, "vercel.json"));
 validateVercelConfig(resolve(projectRoot, "vercel.json"));
+// validateRoute는 이제 "/"에도 돈다: 홈의 canonical·H1·본문 자수·광고 배선이 거기서 검사된다
 SEO_ROUTES.forEach(validateRoute);
 validatePolicyDisclosures();
+// 라우터 대조를 먼저 돌린다: 어떤 라우트가 왜 빠졌는지 이름을 찍어 주므로
+// "목록이 다르다"는 기계적 비교보다 원인을 바로 알려준다.
+const sitemapUrls = readSitemapUrls();
+validateRouterRoutesAreListed(new Set(sitemapUrls));
+validateSitemap(sitemapUrls);
 
-const rootHtml = readFileSync(resolve(distRoot, "index.html"), "utf8");
-assert(readCanonical(rootHtml) === `${canonicalBase}/luggage`, "Invalid root canonical");
-assert((rootHtml.match(/<h1\b/gi)?.length ?? 0) === 1,
-  "Root alias must contain exactly one H1");
-assert(!/<noscript>/i.test(rootHtml),
-  "Root alias must not retain the shell noscript");
-assert(AD_LOADER_PATTERN.test(rootHtml),
-  "Ad wiring regressed: root alias lost the AdSense loader");
+// 홈이 실제로 자기 콘텐츠를 갖고 렌더됐는지. 라우터가 리다이렉트로 되돌아가면
+// vite-ssg는 대상 페이지를 그대로 index.html에 복사해 /travel이 /travel/luggage의 사본이 된다.
+const rootHtml = readFileSync(routeOutputPath("/"), "utf8");
+const titleOf = (html) => html.match(/<title>([^<]+)<\/title>/)?.[1] ?? "";
+assert(!/<div id="app">\s*<\/div>/.test(rootHtml),
+  "Home must be prerendered, not shipped as the empty shell");
+for (const twin of ["/luggage", "/all"]) {
+  assert(titleOf(rootHtml) !== titleOf(readFileSync(routeOutputPath(twin), "utf8")),
+    `Home must not duplicate ${twin}: identical titles mean the home has no page of its own`);
+}
 
 const notFoundPath = resolve(distRoot, "404.html");
 assert(existsSync(notFoundPath), "Missing custom 404.html output");
