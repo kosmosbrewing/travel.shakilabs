@@ -86,6 +86,18 @@ function stripAdsenseLoaderFromNotFound() {
 
 const buildDate = resolveBuildDate();
 
+// 소스 린트라 SSG를 돌리기 전에 먼저 끝낸다 — 죽은 알파 클래스는 빌드를 통과하고
+// 화면도 멀쩡히 렌더되므로, 여기서 못 잡으면 뒤쪽 어떤 게이트도 잡지 못한다.
+const opacityCheck = spawnSync(
+  process.execPath,
+  [resolve(__dirname, "validate-tailwind-opacity.mjs")],
+  { cwd: projectRoot, stdio: "inherit" }
+);
+
+if (opacityCheck.status !== 0) {
+  process.exit(opacityCheck.status ?? 1);
+}
+
 mkdirSync(dirname(sitemapPath), { recursive: true });
 writeFileSync(sitemapPath, renderSitemap(buildDate), "utf8");
 
