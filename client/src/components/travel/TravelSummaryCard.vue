@@ -35,7 +35,9 @@ defineProps<{
       </section>
 
       <!-- 절감폭 배너 -->
-      <div class="travel-summary-delta mx-4 rounded-xl bg-profit/8 px-4 py-3 sm:mx-5">
+      <!-- 알파는 Tailwind opacity 스케일(0,5,10,…,100) 값만 쓴다. /8은 스케일 밖이라
+           클래스 자체가 생성되지 않아 틴트가 아예 칠해지지 않았다(픽셀 실측 배경 #ffffff). -->
+      <div class="travel-summary-delta mx-4 rounded-xl bg-profit/10 px-4 py-3 sm:mx-5">
         <div class="flex items-center gap-2">
           <ArrowDown class="size-4 shrink-0 text-profit" :stroke-width="2.5" />
           <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">

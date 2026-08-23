@@ -28,7 +28,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <header class="border-b border-border bg-primary/8">
+  <!-- /8은 Tailwind opacity 스케일 밖이라 클래스가 생성되지 않았다: 헤더 배경이
+       페이지 배경과 완전히 같은 색으로 칠해져 브랜드 틴트가 전 페이지에서 사라져 있었다. -->
+  <header class="border-b border-border bg-primary/10">
     <div class="container pt-2.5 pb-2.5">
       <div class="overflow-hidden">
         <div class="retro-titlebar h-11 border-b-0 bg-transparent px-1.5 sm:px-2">

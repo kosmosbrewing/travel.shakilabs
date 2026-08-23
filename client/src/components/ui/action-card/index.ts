@@ -6,7 +6,9 @@ export const actionCardVariants = cva(
     variants: {
       variant: {
         default: "border-border/70 bg-card hover:-translate-y-[1px] hover:border-primary/25 hover:bg-muted/15 active:translate-y-0 active:border-primary/30 active:bg-muted/20",
-        accent: "border-primary/20 bg-primary/10 hover:-translate-y-[1px] hover:border-primary/35 hover:bg-primary/12 active:translate-y-0 active:border-primary/40 active:bg-primary/15",
+        // rest /10 -> hover /15 -> active /20. 이전 hover /12는 스케일 밖이라 생성되지 않아
+        // hover가 rest와 완전히 같은 색이었다(= hover 피드백 없음).
+        accent: "border-primary/20 bg-primary/10 hover:-translate-y-[1px] hover:border-primary/35 hover:bg-primary/15 active:translate-y-0 active:border-primary/40 active:bg-primary/20",
       },
     },
     defaultVariants: {
