@@ -9,12 +9,9 @@ import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import CalculatorInteractionTracker from "@/components/analytics/CalculatorInteractionTracker.vue";
 import TravelNextActions from "@/components/travel/TravelNextActions.vue";
-import { useTravelExchangeRates } from "@/composables/useTravelExchangeRates";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
 import { EXCHANGE_RATE_STATUS } from "@/data/exchangeRates";
 import { EXCHANGE_GUIDE } from "@/data/seoGuides";
-
-const { badgeMessage } = useTravelExchangeRates();
 
 const faqItems = [
   {
@@ -56,7 +53,8 @@ const faqJsonLd = {
     <div class="retro-panel overflow-hidden">
       <div class="retro-titlebar rounded-t-2xl">
         <h2 class="retro-title">환전 조건 입력</h2>
-        <FreshBadge :message="badgeMessage" />
+        <!-- 이 배지만 요금 점검일이 아니라 환율 기준일을 말한다 (/about에 이유를 적어 두었다) -->
+        <FreshBadge :message="EXCHANGE_RATE_STATUS.lastUpdated" />
       </div>
       <div class="retro-panel-content space-y-4">
         <p class="text-caption leading-relaxed text-muted-foreground">같은 환전금액이라도 적용 우대율에 따라 예상 수수료가 달라집니다. 거래 은행 앱에서 실제 우대율을 확인한 뒤 비교하세요.</p>
