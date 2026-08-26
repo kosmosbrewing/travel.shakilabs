@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { useConstantsStore } from "@/stores/constants";
 import { CALCULATOR_SPECS, OUT_OF_SCOPE } from "@/data/serviceSpec";
 import { LUGGAGE_SOURCES, TRAVEL_DATA_VERIFIED } from "@/data/travelData";
+import { EXCHANGE_RATE_BASE_DATE, EXCHANGE_RATE_SUMMARY } from "@/data/exchangeRates";
 
 const constantsStore = useConstantsStore();
 </script>
@@ -96,14 +97,19 @@ const constantsStore = useConstantsStore();
           >{{ source.name }}<span v-if="index < LUGGAGE_SOURCES.length - 1">, </span></a>).
           eSIM·로밍·포켓와이파이 단가는 공개 요금제를 데이터 용량과 기간 기준으로 단순화한
           대표값이며, 환전 스프레드는 통화별 고시 환율과 매매기준율의 통상적인 차이를
-          기준으로 잡았습니다. 마지막 가정 점검일은 {{ TRAVEL_DATA_VERIFIED }}이며,
-          점검일은 각 계산기 화면 상단에도 표시됩니다.
+          기준으로 잡았습니다. 수하물·통신 요금 가정값의 마지막 점검일은
+          {{ TRAVEL_DATA_VERIFIED }}이며, 이 날짜는 수하물·eSIM 계산기 화면 상단 배지에
+          그대로 표시됩니다. 환전 계산기 배지에는 요금 점검일 대신 환율 기준일({{ EXCHANGE_RATE_BASE_DATE }})을
+          적어 둡니다. 요금과 환율을 확인한 시점이 서로 달라, 한 날짜로 묶으면 둘 중 하나는
+          거짓이 되기 때문입니다. 정해진 점검 주기는 없고 사람이 확인한 시점에만 값을 고칩니다.
         </p>
         <p class="text-body text-muted-foreground">
           환율은 실시간 시세가 아니라 비교용 기준값을 사용합니다. 이 계산기가 답하려는 질문이
           "지금 1달러가 몇 원인가"가 아니라 "우대율 차이가 내 환전 금액에서 얼마인가"이기
-          때문입니다. 수수료 비교의 상대적 크기는 환율이 조금 움직여도 유지되지만, 수령
-          외화 금액은 실제 환전 시점의 고시 환율에 따라 달라집니다.
+          때문입니다. 이 앱에는 환율을 자동으로 가져오는 장치가 없어,
+          {{ EXCHANGE_RATE_BASE_DATE }} 기준으로 사람이 확인한 값({{ EXCHANGE_RATE_SUMMARY }})을
+          고정값으로 적어 두고 그대로 씁니다. 수수료 비교의 상대적 크기는 환율이 조금 움직여도
+          유지되지만, 수령 외화 금액은 실제 환전 시점의 고시 환율에 따라 달라집니다.
         </p>
       </div>
     </div>
