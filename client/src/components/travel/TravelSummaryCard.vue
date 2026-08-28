@@ -44,7 +44,8 @@ defineProps<{
             <!-- 금액 자체는 중립색으로 읽는다. 의미는 아이콘·"절감" 라벨·배경 틴트가 이미
                  전달하므로, 큰 숫자까지 의미색으로 칠하면 색이 유일한 정보 전달 수단이 된다.
                  (text-profit 3.85:1 -> text-foreground 16.3:1) -->
-            <span class="text-[1.25rem] font-bold tabular-nums text-foreground sm:text-[1.375rem]">
+            <!-- 22px 임의 스케일 → 전 앱 공통 결과 금액 스케일 text-display(26px/700) -->
+            <span class="text-display font-bold tabular-nums text-foreground">
               {{ deltaValue }}
             </span>
             <!-- /70 알파는 2.48:1로 하드 미달이었다. 알파를 걷어 7.20:1 -->
