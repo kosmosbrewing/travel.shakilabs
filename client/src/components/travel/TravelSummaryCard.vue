@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, ArrowDown, BarChart3 } from "lucide-vue-next";
 
@@ -7,7 +8,7 @@ interface SummaryFact {
   value: string;
 }
 
-defineProps<{
+const props = defineProps<{
   headline: string;
   leaderValue: string;
   leaderLabel: string;
@@ -16,6 +17,77 @@ defineProps<{
   deltaLabel: string;
   facts: ReadonlyArray<SummaryFact>;
 }>();
+
+// 카운트업 정책(2026-08 복원): 히어로 금액(절감액)만 애니메이션한다.
+// 리더는 텍스트(옵션 이름)라 대상이 아니고, 보조 스탯은 정적 유지.
+// - SSR/SSG 산출물에는 항상 최종값이 정적으로 남는다(초기 ref = props.deltaValue,
+//   애니메이션은 onMounted 이후에만 → 하이드레이션 불일치 없음).
+// - 마운트 시 0→값, props 변경 시 현재 표시값→새 값으로 보간.
+// - prefers-reduced-motion 이면 즉시 최종값.
+const DURATION_MS = 750;
+const NUM_RE = /-?\d[\d,]*(?:\.\d+)?/;
+
+const displayDelta = ref(props.deltaValue);
+let rafId = 0;
+
+function parseNum(text: string): { num: number; decimals: number } | null {
+  const m = text.match(NUM_RE);
+  if (!m) return null;
+  const raw = m[0].replace(/,/g, "");
+  const num = Number(raw);
+  if (!Number.isFinite(num)) return null;
+  const decimals = raw.includes(".") ? raw.split(".")[1].length : 0;
+  return { num, decimals };
+}
+
+function formatLike(template: string, n: number, decimals: number): string {
+  const grouped = template.match(NUM_RE)?.[0].includes(",") ?? false;
+  const formatted = n.toLocaleString("ko-KR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+    useGrouping: grouped,
+  });
+  return template.replace(NUM_RE, formatted);
+}
+
+function animateTo(from: number, target: string) {
+  cancelAnimationFrame(rafId);
+  const parsed = parseNum(target);
+  if (
+    !parsed ||
+    parsed.num === from ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    displayDelta.value = target;
+    return;
+  }
+  const start = performance.now();
+  const delta = parsed.num - from;
+  const tick = (now: number) => {
+    const t = Math.min((now - start) / DURATION_MS, 1);
+    if (t >= 1) {
+      displayDelta.value = target;
+      return;
+    }
+    const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+    displayDelta.value = formatLike(target, from + delta * eased, parsed.decimals);
+    rafId = requestAnimationFrame(tick);
+  };
+  rafId = requestAnimationFrame(tick);
+}
+
+onMounted(() => {
+  animateTo(0, props.deltaValue);
+  watch(
+    () => props.deltaValue,
+    (next) => {
+      const current = parseNum(displayDelta.value)?.num ?? 0;
+      animateTo(current, next);
+    },
+  );
+});
+
+onBeforeUnmount(() => cancelAnimationFrame(rafId));
 </script>
 
 <template>
@@ -46,7 +118,7 @@ defineProps<{
                  (text-profit 3.85:1 -> text-foreground 16.3:1) -->
             <!-- 22px 임의 스케일 → 전 앱 공통 결과 금액 스케일 text-display(26px/700) -->
             <span class="text-display font-bold tabular-nums text-foreground">
-              {{ deltaValue }}
+              {{ displayDelta }}
             </span>
             <!-- /70 알파는 2.48:1로 하드 미달이었다. 알파를 걷어 7.20:1 -->
             <span class="text-caption font-medium text-profit">절감</span>

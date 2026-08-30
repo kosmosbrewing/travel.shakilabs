@@ -69,6 +69,41 @@ const files = [
   resolve(projectRoot, "index.html"),
 ];
 
+// Axis 2 - spacing. The same silent-death mechanism applies to the spacing
+// scale: `mt-13` or `p-4.5` compiles to nothing because 13 and 4.5 are not
+// spacing keys. Stock scale while theme.spacing is untouched (asserted below).
+const SPACING_SCALE = new Set([
+  "0", "0.5", "1", "1.5", "2", "2.5", "3", "3.5", "4", "5", "6", "7", "8", "9",
+  "10", "11", "12", "14", "16", "20", "24", "28", "32", "36", "40", "44", "48",
+  "52", "56", "60", "64", "72", "80", "96", "px",
+]);
+// Numeric-valued spacing utilities only; dynamic strings and fractions like
+// `w-1/2` stay out of scope to avoid false positives.
+const SPACING_MODIFIER = new RegExp(
+  String.raw`(?<![\w/[-])(?:(?:[a-z][\w.-]*):)*-?(m[trblxyse]?|p[trblxyse]?|gap(?:-[xy])?|space-[xy])-(\d+(?:\.\d+)?|px)(?![\w/%.[-])`,
+  "g"
+);
+
+// Axis 3 - trailing `!`. Tailwind v3 spells important as a prefix (`!mt-4`);
+// the v4 suffix form (`mt-4!`) generates no rule in v3 and just sits in the
+// markup. Any hit is an error regardless of the value.
+const TRAILING_BANG = new RegExp(
+  String.raw`(?:(?:[a-z][\w.-]*):)*(?:${COLOR_PREFIX}|m[trblxyse]?|p[trblxyse]?|gap|w|h|z|flex|grid|rounded|opacity|shadow)-[a-z0-9[\]/.%-]+!(?=[\s"'\x60])`,
+  "g"
+);
+
+function assertSpacingScaleIsStock() {
+  const config = readFileSync(resolve(projectRoot, "tailwind.config.ts"), "utf8");
+  if (/\bspacing\s*:/.test(config)) {
+    throw new Error(
+      "tailwind.config.ts now customises theme.spacing - update SPACING_SCALE in " +
+        "scripts/validate-tailwind-opacity.mjs to match before this gate can be trusted."
+    );
+  }
+}
+
+assertSpacingScaleIsStock();
+
 const failures = [];
 let checked = 0;
 
@@ -81,7 +116,24 @@ for (const file of files) {
       failures.push({
         file: relative(projectRoot, file),
         line: i + 1,
-        token: match[0],
+        token: match[0] + `  (no CSS is generated for /${match[1]})`,
+      });
+    }
+    for (const match of line.matchAll(SPACING_MODIFIER)) {
+      checked += 1;
+      if (SPACING_SCALE.has(match[2])) continue;
+      failures.push({
+        file: relative(projectRoot, file),
+        line: i + 1,
+        token: match[0] + "  (off the spacing scale - no CSS generated)",
+      });
+    }
+    for (const match of line.matchAll(TRAILING_BANG)) {
+      checked += 1;
+      failures.push({
+        file: relative(projectRoot, file),
+        line: i + 1,
+        token: match[0] + "  (v4 suffix important - use the !prefix form)",
       });
     }
   });
@@ -89,12 +141,12 @@ for (const file of files) {
 
 if (failures.length > 0) {
   const detail = failures
-    .map((f) => `  ${f.file}:${f.line}  ${f.token}  (no CSS is generated for /${f.token.split("/").pop()})`)
+    .map((f) => `  ${f.file}:${f.line}  ${f.token}`)
     .join("\n");
   throw new Error(
-    `Dead Tailwind opacity modifiers - ${failures.length} found.\n${detail}\n\n` +
-      `Allowed steps: ${[...SCALE].join(", ")}. ` +
-      "Snap to the nearest step, or drop the class if the tint was never wanted."
+    `Dead Tailwind utilities - ${failures.length} found.\n${detail}\n\n` +
+      `Opacity steps: ${[...SCALE].join(", ")}. ` +
+      "Snap to a generated value, or drop the class if the style was never wanted."
   );
 }
 
