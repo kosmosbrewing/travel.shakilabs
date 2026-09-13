@@ -3,10 +3,11 @@ import { toValue, type MaybeRefOrGetter } from "vue";
 import { useRoute } from "vue-router";
 import { getSiteUrl } from "@/lib/site";
 
-const TITLE_SUFFIX = " | 여행 준비 비용 비교";
-const DEFAULT_TITLE = "여행 준비 비용 비교";
+const TITLE_SUFFIX = " | 여행 준비 비용 비교 | ShakiLabs";
+const DEFAULT_TITLE = "여행 준비 비용 비교 | ShakiLabs";
 const LEGACY_TITLE_SUFFIXES = [
   " | shakilabs.com/travel",
+  " | 여행 준비 비용 비교",
   " | ShakiLabs",
   TITLE_SUFFIX,
 ] as const;

@@ -10,7 +10,7 @@ import { TRAVEL_HOME_GUIDE } from "@/data/seoGuides";
 
 <template>
   <SEOHead
-    title="여행 계산기 전체 보기 | 수하물·통신·환전 도구"
+    title="여행 계산기 전체 보기 · 수하물·통신·환전 도구"
     description="수하물, eSIM·로밍, 환전 비용을 출국 전에 비교할 수 있는 여행 계산 도구를 확인하세요."
   />
   <div class="container space-y-5 py-5">

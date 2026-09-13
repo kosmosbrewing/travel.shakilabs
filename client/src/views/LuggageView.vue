@@ -47,7 +47,7 @@ const faqJsonLd = {
 
 <template>
   <SEOHead
-    title="LCC 수하물 요금 비교 | shakilabs.com/travel"
+    title="LCC 수하물 요금 비교"
     description="여행 인원과 가방 무게를 기준으로 위탁수하물 예산 범위를 계산하고 항공사 공식 요금표를 확인하세요."
     :json-ld="faqJsonLd"
   />
