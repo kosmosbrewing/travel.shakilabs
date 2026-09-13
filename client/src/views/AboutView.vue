@@ -12,7 +12,7 @@ const constantsStore = useConstantsStore();
 
 <template>
   <SEOHead
-    title="서비스 안내 — 계산 방식과 가정값"
+    title="서비스 안내 · 계산 방식과 가정값"
     description="shakilabs.com/travel이 수하물·eSIM·환전 비용을 어떤 공식과 가정값으로 계산하는지, 어떤 입력을 받고 무엇은 다루지 않는지 밝힙니다."
   />
 

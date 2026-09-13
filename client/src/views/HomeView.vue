@@ -13,7 +13,7 @@ import {
 } from "@/data/homeHighlights";
 import { buildCanonicalUrl } from "@/lib/site";
 
-const SEO_TITLE = "여행 비용 계산기 | 수하물·데이터·환전 출국 전 점검";
+const SEO_TITLE = "여행 비용 계산기 · 수하물·데이터·환전 출국 전 점검 | ShakiLabs";
 const SEO_DESCRIPTION =
   "항공권을 끊고 나면 수하물, 현지 데이터, 환전에서 예산이 새어 나갑니다. 세 항목의 요금 구조와 2026년 기준 가정값을 정리하고, 조건을 넣어 바로 비교할 수 있는 계산기를 제공합니다.";
 

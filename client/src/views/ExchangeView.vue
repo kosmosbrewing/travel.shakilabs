@@ -43,7 +43,7 @@ const faqJsonLd = {
 
 <template>
   <SEOHead
-    title="환전 수수료 비교 | shakilabs.com/travel"
+    title="환전 수수료 비교"
     description="USD, JPY, EUR 기준으로 환전 우대율별 예상 수수료를 비교하세요."
     :json-ld="faqJsonLd"
   />
