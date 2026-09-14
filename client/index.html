@@ -69,12 +69,14 @@
          미달을 실측해 올린 값이다. foreground 짝은 배경을 바꾸면 같이 뒤집어야 한다 —
          다크에서 밝은 배경 위에 흰 글씨가 남으면 2:1대로 떨어진다. */
       :root {
-        --background: 210 40% 98%;
-        --foreground: 222 47% 11%;
+        /* v3 §2.1 역할 토큰 — canvas/card/ink/ink-muted/line/focus는 hex에서 역산(반올림 왕복 검증 완료).
+           --primary(브랜드 hue 38)는 위 주석대로 그대로 둔다 — 건드리는 건 구조색뿐이다. */
+        --background: 60 11.11% 96.47%; /* color.canvas #F7F7F5 */
+        --foreground: 0 0% 3.92%; /* color.ink #0A0A0A */
         --muted: 210 40% 96%;
-        --muted-foreground: 215 16% 37%;
-        --card: 0 0% 100%;
-        --card-foreground: 222 47% 11%;
+        --muted-foreground: 60 3.37% 34.9%; /* color.ink-muted #5C5C56 */
+        --card: 0 0% 100%; /* color.card #FFFFFF */
+        --card-foreground: 0 0% 3.92%;
         --primary: 38 90% 28%;
         --primary-foreground: 0 0% 100%;
         --secondary: 39 45% 92%;
@@ -83,11 +85,15 @@
         --accent-foreground: 35 82% 35%;
         --popover: 0 0% 100%;
         --popover-foreground: 222 47% 11%;
+        /* v3 §4.1 카테고리 액센트 API — @shakilabs/ui 0.3.15가 읽는 계약: --accent-hsl / --accent-muted-hsl.
+           브랜드색(황토)은 지우지 않고 그대로 주입 — SecondaryNav underline·ResultAmount 전용 */
+        --accent-hsl: 38 90% 28%;
+        --accent-muted-hsl: 38 90% 28%;
         --destructive: 0 74% 42%;
         --destructive-foreground: 210 40% 98%;
-        --border: 214 16% 85%;
+        --border: 60 8% 90.2%; /* color.line #E8E8E4 */
         --input: 214 16% 85%;
-        --ring: 38 90% 28%;
+        --ring: 0 0% 3.92%; /* color.focus #0A0A0A (v3 §2.1 — 포커스는 브랜드색이 아니라 ink) */
         --radius: 0.4rem;
         --profit: 142 64% 24%;
         --profit-foreground: 0 0% 100%;
@@ -96,25 +102,27 @@
       }
 
       .dark {
-        --background: 222 47% 11%;
-        --foreground: 210 40% 96%;
+        --background: 0 0% 7.06%; /* color.canvas dark #121212 */
+        --foreground: 0 0% 96.08%; /* color.ink dark #F5F5F5 */
         --muted: 217 33% 17%;
-        --muted-foreground: 215 20% 72%;
-        --card: 217 33% 17%;
-        --card-foreground: 210 40% 96%;
+        --muted-foreground: 60 3.33% 64.71%; /* color.ink-muted dark #A8A8A2 */
+        --card: 0 0% 10.98%; /* color.card dark #1C1C1C */
+        --card-foreground: 0 0% 96.08%;
         --primary: 38 88% 57%;
         --primary-foreground: 35 70% 12%;
         --secondary: 35 16% 18%;
         --secondary-foreground: 210 40% 96%;
         --accent: 34 18% 23%;
         --accent-foreground: 38 75% 82%;
-        --popover: 217 33% 17%;
-        --popover-foreground: 210 40% 96%;
+        --popover: 0 0% 10.98%;
+        --popover-foreground: 0 0% 96.08%;
+        --accent-hsl: 38 88% 57%;
+        --accent-muted-hsl: 38 88% 57%;
         --destructive: 0 75% 72%;
         --destructive-foreground: 0 60% 10%;
-        --border: 214 16% 26%;
+        --border: 0 0% 16.47%; /* color.line dark #2A2A2A */
         --input: 214 16% 30%;
-        --ring: 38 88% 57%;
+        --ring: 0 0% 96.08%; /* color.focus dark #F5F5F5 */
         --profit: 148 63% 66%;
         --profit-foreground: 148 70% 10%;
         --fee: 0 75% 72%;
@@ -123,6 +131,10 @@
 
       html {
         font-size: 16px;
+        /* v3 §3.1 BL-061 — 앵커·H2가 고정 헤더/2차 내비에 가리지 않게 스크롤 오프셋 확보 */
+        --header-h: 56px;
+        --secondary-nav-h: 49px;
+        scroll-padding-top: calc(var(--header-h) + var(--secondary-nav-h, 0px) + 8px);
       }
 
       body {
