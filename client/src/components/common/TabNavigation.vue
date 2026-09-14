@@ -23,10 +23,20 @@ const activeItem = computed(() => tabs.find((item) =>
 </script>
 
 <template>
+  <!-- 모바일(<48rem)은 헤더의 좌측 드로어가 대신한다(v3 §3.3-1).
+       링크는 드로어에 그대로 렌더되므로 크롤 경로는 유지된다. -->
   <ShPrimaryNavigation
+    class="tab-navigation--desktop-only"
     :items="tabs"
     :active-key="activeItem?.key"
     :link-component="RouterLink"
-    :mobile-columns="2"
   />
 </template>
+
+<style scoped>
+@media (max-width: 47.99rem) {
+  .tab-navigation--desktop-only {
+    display: none;
+  }
+}
+</style>
