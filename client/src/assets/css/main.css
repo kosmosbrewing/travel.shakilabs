@@ -28,9 +28,11 @@
   font-display: swap;
 }
 
+/* 강조 숫자 전용 서브셋(숫자·통화/수량 단위 44자). font-brand로 히어로 금액에만 적용한다.
+   944KB 전체 글리프 .woff는 더 이상 참조하지 않는다(서브셋 생성 소스로만 디스크에 남김). */
 @font-face {
   font-family: "GmarketSans";
-  src: url("/fonts/GmarketSansBold.woff") format("woff");
+  src: url("/fonts/GmarketSansBold-num-v1.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
