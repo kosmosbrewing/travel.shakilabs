@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { onBeforeUnmount, ref, watch } from "vue";
 import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, ArrowDown, BarChart3 } from "lucide-vue-next";
 
@@ -18,11 +18,13 @@ const props = defineProps<{
   facts: ReadonlyArray<SummaryFact>;
 }>();
 
-// 카운트업 정책(2026-08 복원): 히어로 금액(절감액)만 애니메이션한다.
+// 카운트업 계약(BL-020, finance ResultHero.vue 참조): 히어로 금액(절감액)만 애니메이션한다.
 // 리더는 텍스트(옵션 이름)라 대상이 아니고, 보조 스탯은 정적 유지.
-// - SSR/SSG 산출물에는 항상 최종값이 정적으로 남는다(초기 ref = props.deltaValue,
-//   애니메이션은 onMounted 이후에만 → 하이드레이션 불일치 없음).
-// - 마운트 시 0→값, props 변경 시 현재 표시값→새 값으로 보간.
+// - 트리거는 포맷된 문자열이 바뀌는 경우 단 하나뿐이다. 로드·하이드레이션에는 재실행하지
+//   않는다(초기 ref = props.deltaValue이므로 SSR/SSG 산출물과 첫 클라이언트 렌더 모두
+//   최종값을 그대로 보여준다 — 0에서 시작하지 않는다).
+// - props 변경 시: 현재 표시값 → 새 값으로 보간(중단되면 화면에 있던 값에서 이어감, 0으로
+//   리셋하지 않음).
 // - prefers-reduced-motion 이면 즉시 최종값.
 const DURATION_MS = 750;
 const NUM_RE = /-?\d[\d,]*(?:\.\d+)?/;
@@ -76,16 +78,14 @@ function animateTo(from: number, target: string) {
   rafId = requestAnimationFrame(tick);
 }
 
-onMounted(() => {
-  animateTo(0, props.deltaValue);
-  watch(
-    () => props.deltaValue,
-    (next) => {
-      const current = parseNum(displayDelta.value)?.num ?? 0;
-      animateTo(current, next);
-    },
-  );
-});
+watch(
+  () => props.deltaValue,
+  (next, previous) => {
+    if (next === previous) return;
+    const current = parseNum(displayDelta.value)?.num ?? 0;
+    animateTo(current, next);
+  },
+);
 
 onBeforeUnmount(() => cancelAnimationFrame(rafId));
 </script>
@@ -117,7 +117,7 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId));
                  전달하므로, 큰 숫자까지 의미색으로 칠하면 색이 유일한 정보 전달 수단이 된다.
                  (text-profit 3.85:1 -> text-foreground 16.3:1) -->
             <!-- 22px 임의 스케일 → 전 앱 공통 결과 금액 스케일 text-display(26px/700) -->
-            <span class="text-display font-bold tabular-nums text-foreground">
+            <span class="text-display font-brand font-bold tabular-nums text-foreground">
               {{ displayDelta }}
             </span>
             <!-- /70 알파는 2.48:1로 하드 미달이었다. 알파를 걷어 7.20:1 -->
