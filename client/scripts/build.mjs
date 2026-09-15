@@ -126,4 +126,20 @@ const validationResult = spawnSync(
   }
 );
 
-process.exit(validationResult.status ?? 1);
+if (validationResult.status !== 0) {
+  process.exit(validationResult.status ?? 1);
+}
+
+// GmarketSans 서브셋 커버리지(BL-020, docs/BRAND_FONT_SUBSET.md §6~7)를 매 빌드마다
+// fontTools cmap 대조로 게이트한다. document.fonts.check()는 이 환경에서 항상 true를
+// 반환해 못 쓴다 — 자세한 이유는 verify-fonts.mjs 주석 참조.
+const fontsResult = spawnSync(
+  process.execPath,
+  [resolve(projectRoot, "scripts", "verify-fonts.mjs")],
+  {
+    cwd: projectRoot,
+    stdio: "inherit",
+  }
+);
+
+process.exit(fontsResult.status ?? 1);
