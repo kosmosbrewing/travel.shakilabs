@@ -3,14 +3,17 @@
 // document.fonts.check()는 쓰지 않는다 — 이 환경의 Chromium은 무엇을 물어도 true를
 // 반환해(docs/BRAND_FONT_SUBSET.md §6) 실패할 수 없는 가짜 게이트가 된다. 대신
 // fontTools cmap 전수 대조로만 판정한다: manifest.charset(렌더 수집 결과, 소스 grep
-// 아님)의 모든 코드포인트가 실제로 배포되는 폰트의 cmap에 있는지 python3 fontTools로
-// 확인한다.
-import { spawnSync } from "node:child_process";
+// 아님)의 모든 코드포인트가 실제로 배포되는 폰트의 cmap에 있는지 확인한다.
+//
+// cmap은 python fontTools가 아니라 순수 Node로 읽는다 — 이 게이트는 `npm run build`에
+// 얹혀 Vercel에서도 도는데 그쪽 빌드 이미지에 fontTools(pip 패키지)가 없다.
+// python을 부르면 게이트가 아니라 배포 장애가 된다.
 import { createHash } from "node:crypto";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { fontJobs, manifestPath } from "./font-subset-config.mjs";
+import { woff2CodePoints } from "./woff2-cmap.mjs";
 
 const scriptRoot = dirname(fileURLToPath(import.meta.url));
 const clientRoot = resolve(scriptRoot, "..");
@@ -68,18 +71,17 @@ for (const fontJob of fontJobs) {
     "구 숫자 전용 서브셋(GmarketSansBold-num-v1.woff2)이 여전히 CSS에서 참조된다"
   );
 
-  // fontTools cmap 전수 대조 — §6: document.fonts.check() 금지, 이 방식만 유효하다.
-  const pyScript = `
-import json, sys
-from fontTools.ttLib import TTFont
-cm = set(TTFont(${JSON.stringify(fontPath)}).getBestCmap())
-charset = ${JSON.stringify(manifest.charset)}
-missing = sorted({c for c in charset if ord(c) not in cm})
-print(json.dumps(missing))
-`;
-  const result = spawnSync("python3", ["-c", pyScript], { encoding: "utf8" });
-  assert(result.status === 0, `fontTools cmap 조회 실패: ${result.stderr}`);
-  const missing = JSON.parse(result.stdout.trim());
+  // cmap 전수 대조 — §6: document.fonts.check() 금지, 산출물 직접 파싱만 유효하다.
+  const codePoints = woff2CodePoints(font);
+  // charset이 아니라 renderedTexts(실측 원본)를 대조한다 — charset은 서브셋을 만든
+  // 입력이라 그걸로 재면 "요청한 글자가 들어갔나"만 보는 항등식에 가까워진다.
+  // 렌더 실측과 대조해야 수집 누락까지 잡힌다.
+  const renderedCharacters = new Set(
+    [...(manifest.renderedTexts ?? []), manifest.numeralCharacters ?? ""].flatMap((text) => [...text])
+  );
+  const missing = [...renderedCharacters]
+    .filter((character) => !codePoints.has(character.codePointAt(0)))
+    .sort();
   assert(
     missing.length === 0,
     `${fontJob.publicName}에 누락된 문자가 있다 (서체 혼합 위험): ${JSON.stringify(missing)}`
