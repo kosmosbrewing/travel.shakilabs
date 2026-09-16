@@ -12,6 +12,8 @@ import {
   type PrimaryNavigationItem,
 } from "@shakilabs/ui";
 import { TRAVEL_TOOLS } from "@/data/travelNavigation";
+import TickerBar from "@/components/common/TickerBar.vue";
+import { tickerMessages } from "@/data/tickerMessages";
 
 const THEME_STORAGE_KEY = "travel-tools:theme:v1";
 type ThemeMode = "light" | "dark";
@@ -65,6 +67,14 @@ const links: GlobalHeaderLink[] = [{ href: "/blog", label: "블로그" }];
     nav-title="여행 도구"
     :link-component="RouterLink"
   >
+    <!-- 헤더 가운데 회전 안내. 패키지가 흐름 밖에 절대 배치 + 한 줄 말줄임으로 그리므로
+         문구 길이가 56px 헤더 높이를 바꾸지 못한다(과거 BL-005 가변 헤더 사고 재발 방지).
+         이전에는 헤더 높이가 흔들려서 본문 캡션 줄로 내렸었는데, 0.3.24가 그 원인을
+         구조적으로 없앴으므로 다시 헤더로 올린다. -->
+    <template #tip>
+      <TickerBar :messages="tickerMessages" />
+    </template>
+
     <template #utility>
       <ShButton
         type="button"
