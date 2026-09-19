@@ -12,7 +12,7 @@ const constantsStore = useConstantsStore();
     description="shakilabs.com/travel의 개인정보 처리방침입니다. 수하물·통신·환전 계산기가 받는 입력값의 브라우저 내 처리 원칙, 여행 앱이지만 여권·예약 정보를 받지 않는 이유, 제3자 광고 쿠키와 맞춤 광고 해제 방법을 안내합니다."
   />
 
-  <div class="container py-5">
+  <div class="sh-container sh-container--prose py-5">
     <div class="retro-panel">
       <div class="retro-titlebar rounded-t-2xl">
         <h1 class="retro-title">개인정보 처리방침</h1>
