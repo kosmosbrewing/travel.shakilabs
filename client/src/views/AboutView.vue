@@ -16,7 +16,7 @@ const constantsStore = useConstantsStore();
     description="shakilabs.com/travel이 수하물·eSIM·환전 비용을 어떤 공식과 가정값으로 계산하는지, 어떤 입력을 받고 무엇은 다루지 않는지 밝힙니다."
   />
 
-  <div class="container py-5 space-y-5">
+  <div class="sh-container sh-container--prose py-5 space-y-5">
     <div class="retro-panel">
       <div class="retro-titlebar rounded-t-2xl">
         <h1 class="retro-title">서비스 안내</h1>

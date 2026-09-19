@@ -47,7 +47,7 @@ const faqJsonLd = {
     description="여행 일수와 동행 인원을 기준으로 eSIM, 통신사 로밍, 포켓와이파이 비용을 비교하세요."
     :json-ld="faqJsonLd"
   />
-  <div class="container space-y-5 py-5">
+  <div class="sh-container sh-container--tool space-y-5 py-5">
     <CalculatorPageHeader title="eSIM·로밍·와이파이 비교" />
 
     <div class="retro-panel overflow-hidden">

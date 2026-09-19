@@ -47,7 +47,7 @@ const faqJsonLd = {
     description="USD, JPY, EUR 기준으로 환전 우대율별 예상 수수료를 비교하세요."
     :json-ld="faqJsonLd"
   />
-  <div class="container space-y-5 py-5">
+  <div class="sh-container sh-container--tool space-y-5 py-5">
     <CalculatorPageHeader title="환전 수수료 비교" />
 
     <div class="retro-panel overflow-hidden">

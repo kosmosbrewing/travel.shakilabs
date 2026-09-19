@@ -11,7 +11,7 @@ const constantsStore = useConstantsStore();
     description="shakilabs.com/travel의 서비스 이용약관입니다. 수하물·eSIM·환전 계산 결과의 성격(예산 시나리오), 항공사 운송약관·통신사 요금제·은행 고시환율이 우선한다는 점, 광고 게재와 면책 범위를 안내합니다."
   />
 
-  <div class="container py-5">
+  <div class="sh-container sh-container--prose py-5">
     <div class="retro-panel">
       <div class="retro-titlebar rounded-t-2xl">
         <h1 class="retro-title">이용약관</h1>
