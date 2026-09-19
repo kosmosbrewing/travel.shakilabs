@@ -109,19 +109,19 @@ onBeforeUnmount(() => cancelAnimationFrame(rafId));
       <!-- 절감폭 배너 -->
       <!-- 알파는 Tailwind opacity 스케일(0,5,10,…,100) 값만 쓴다. /8은 스케일 밖이라
            클래스 자체가 생성되지 않아 틴트가 아예 칠해지지 않았다(픽셀 실측 배경 #ffffff). -->
-      <div class="travel-summary-delta mx-4 rounded-xl bg-profit/10 px-4 py-3 sm:mx-5">
+      <div class="travel-summary-delta mx-4 rounded-xl bg-status-success/10 px-4 py-3 sm:mx-5">
         <div class="flex items-center gap-2">
-          <ArrowDown class="size-4 shrink-0 text-profit" :stroke-width="2.5" />
+          <ArrowDown class="size-4 shrink-0 text-status-success" :stroke-width="2.5" />
           <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
             <!-- 금액 자체는 중립색으로 읽는다. 의미는 아이콘·"절감" 라벨·배경 틴트가 이미
                  전달하므로, 큰 숫자까지 의미색으로 칠하면 색이 유일한 정보 전달 수단이 된다.
-                 (text-profit 3.85:1 -> text-foreground 16.3:1) -->
+                 (text-status-success 3.85:1 -> text-foreground 16.3:1) -->
             <!-- 22px 임의 스케일 → 전 앱 공통 결과 금액 스케일 text-display(26px/700) -->
             <span class="text-display font-brand font-bold tabular-nums text-foreground">
               {{ displayDelta }}
             </span>
             <!-- /70 알파는 2.48:1로 하드 미달이었다. 알파를 걷어 7.20:1 -->
-            <span class="text-caption font-medium text-profit">절감</span>
+            <span class="text-caption font-medium text-status-success">절감</span>
           </div>
         </div>
         <p class="mt-1 pl-6 text-tiny text-muted-foreground">

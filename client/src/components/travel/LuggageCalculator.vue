@@ -80,7 +80,7 @@ function selectPreset(key: string): void {
       />
     </div>
 
-    <p class="text-caption leading-relaxed text-muted-foreground">{{ TRAVEL_ASSUMPTION_NOTE }}</p>
+    <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">{{ TRAVEL_ASSUMPTION_NOTE }}</p>
     <TravelMetricGrid :items="metrics" />
     <ShBulletProgress
       label="가장 비싼 시나리오 대비 최저가 비중"

@@ -29,7 +29,7 @@
     <meta name="geo.placename" content="대한민국" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta name="theme-color" content="hsl(38, 92%, 50%)" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="hsl(25, 85%, 27%)" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="hsl(222, 47%, 11%)" media="(prefers-color-scheme: dark)" />
     <script type="application/ld+json">
       {
@@ -64,41 +64,38 @@
       })();
     </script>
     <style>
-      /* 브랜드 hue(38 = travel 앰버)는 DESIGN_TOKENS.md §2가 대장이므로 건드리지 않는다.
-         아래에서 조정한 것은 의미색(profit/fee/destructive)뿐이며, 전부 WCAG AA 4.5:1
-         미달을 실측해 올린 값이다. foreground 짝은 배경을 바꾸면 같이 뒤집어야 한다 —
-         다크에서 밝은 배경 위에 흰 글씨가 남으면 2:1대로 떨어진다. */
+      /* 브랜드 hue — DESIGN_CLEANUP_PLAN_2026-09-17.md §2.2 "사업·여행"(주황) 그룹으로 통일.
+         기존 호박(hue 38)은 사업 주황(hue 25/24)과 13° 차이뿐이라 "비슷한데 다름"만
+         남기고 구분 신호가 되지 못했다 — seller와 같은 값으로 합친다(재계산 금지, 확정표 그대로).
+         의미색(status-success/warning/danger/info)은 main.css로 옮겨 v3 고정 hex를 쓴다 —
+         과거 이 자리에 있던 --profit/--fee 리터럴은 폐기(§2.2 "로컬 별칭은 매핑하고 정의 삭제"). */
       :root {
-        /* v3 §2.1 역할 토큰 — canvas/card/ink/ink-muted/line/focus는 hex에서 역산(반올림 왕복 검증 완료).
-           --primary(브랜드 hue 38)는 위 주석대로 그대로 둔다 — 건드리는 건 구조색뿐이다. */
+        /* v3 §2.1 역할 토큰 — canvas/card/ink/ink-muted/line/focus는 hex에서 역산(반올림 왕복 검증 완료). */
         --background: 60 11.11% 96.47%; /* color.canvas #F7F7F5 */
         --foreground: 0 0% 3.92%; /* color.ink #0A0A0A */
         --muted: 210 40% 96%;
         --muted-foreground: 60 3.37% 34.9%; /* color.ink-muted #5C5C56 */
         --card: 0 0% 100%; /* color.card #FFFFFF */
         --card-foreground: 0 0% 3.92%;
-        --primary: 38 90% 28%;
+        --primary: 25 85% 27%;
         --primary-foreground: 0 0% 100%;
-        --secondary: 39 45% 92%;
+        --secondary: 25 15% 91%;
         --secondary-foreground: 222 47% 11%;
-        --accent: 39 80% 96%;
-        --accent-foreground: 35 82% 35%;
+        --accent: 25 83% 95%;
+        --accent-foreground: 25 85% 30%;
         --popover: 0 0% 100%;
         --popover-foreground: 222 47% 11%;
         /* v3 §4.1 카테고리 액센트 API — @shakilabs/ui 0.3.15가 읽는 계약: --accent-hsl / --accent-muted-hsl.
-           브랜드색(황토)은 지우지 않고 그대로 주입 — SecondaryNav underline·ResultAmount 전용 */
-        --accent-hsl: 38 90% 28%;
-        --accent-muted-hsl: 38 90% 28%;
+           브랜드색은 지우지 않고 그대로 주입 — SecondaryNav underline·ResultAmount 전용.
+           --primary와 항상 같은 값으로 유지한다(따로 갱신 잊으면 내비 밑줄만 옛 색으로 남는다). */
+        --accent-hsl: 25 85% 27%;
+        --accent-muted-hsl: 25 85% 27%;
         --destructive: 0 74% 42%;
         --destructive-foreground: 210 40% 98%;
         --border: 60 8% 90.2%; /* color.line #E8E8E4 */
         --input: 214 16% 85%;
         --ring: 0 0% 3.92%; /* color.focus #0A0A0A (v3 §2.1 — 포커스는 브랜드색이 아니라 ink) */
         --radius: 0.4rem;
-        --profit: 142 64% 24%;
-        --profit-foreground: 0 0% 100%;
-        --fee: 0 74% 42%;
-        --fee-foreground: 0 0% 100%;
       }
 
       .dark {
@@ -108,25 +105,21 @@
         --muted-foreground: 60 3.33% 64.71%; /* color.ink-muted dark #A8A8A2 */
         --card: 0 0% 10.98%; /* color.card dark #1C1C1C */
         --card-foreground: 0 0% 96.08%;
-        --primary: 38 88% 57%;
-        --primary-foreground: 35 70% 12%;
-        --secondary: 35 16% 18%;
+        --primary: 24 82% 56%;
+        --primary-foreground: 24 82% 10%;
+        --secondary: 24 15% 20%;
         --secondary-foreground: 210 40% 96%;
-        --accent: 34 18% 23%;
-        --accent-foreground: 38 75% 82%;
+        --accent: 24 62% 22%;
+        --accent-foreground: 24 82% 78%;
         --popover: 0 0% 10.98%;
         --popover-foreground: 0 0% 96.08%;
-        --accent-hsl: 38 88% 57%;
-        --accent-muted-hsl: 38 88% 57%;
+        --accent-hsl: 24 82% 56%;
+        --accent-muted-hsl: 24 82% 56%;
         --destructive: 0 75% 72%;
         --destructive-foreground: 0 60% 10%;
         --border: 0 0% 16.47%; /* color.line dark #2A2A2A */
         --input: 214 16% 30%;
         --ring: 0 0% 96.08%; /* color.focus dark #F5F5F5 */
-        --profit: 148 63% 66%;
-        --profit-foreground: 148 70% 10%;
-        --fee: 0 75% 72%;
-        --fee-foreground: 0 60% 10%;
       }
 
       html {

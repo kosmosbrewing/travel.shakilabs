@@ -44,24 +44,26 @@
 
 @layer base {
   /* 의미색은 본문 텍스트로도 쓰이므로(@shakilabs/ui가 --sh-color-success/warning/danger를
-     color: 로 소비) 라이트 모드는 WCAG AA 4.5:1을 넘겨야 한다. 아래 값은 finance·house가
-     이미 쓰는 통과값과 동일하게 맞춘 것 — 앱마다 다른 리터럴이 돌아다니면 재발한다.
+     color: 로 소비) 라이트 모드는 WCAG AA 4.5:1을 넘겨야 한다. DESIGN_CLEANUP_PLAN_2026-09-17.md
+     §2.2 — v3 §2.1 고정 hex(success #1B7A4A·warning #B45309·danger #C62828·info #1D4E8C,
+     다크 #5DCA8E·#F0B429·#F07171·#8BB4E8)를 그대로 HSL로 역산해 12앱 공통값으로 통일한다.
+     --status-caution은 v3 4색에 없는 travel 로컬 보조 토큰이라 이번 통일 대상이 아니다(그대로 유지).
      측정 기준: --background 210 40% 98% / --card 0 0% 100% / --muted 210 40% 96% */
   :root {
-    --status-success: 142 64% 24%; /* 3.69:1 -> 6.87:1 */
-    --status-warning: 24 83% 31%; /* 2.48:1 -> 6.73:1 (대형 텍스트 3:1도 미달이었음) */
+    --status-success: 149.68 63.76% 29.22%; /* #1B7A4A */
+    --status-warning: 25.96 90.48% 37.06%; /* #B45309 */
     --status-caution: 17 79% 34%; /* 3.03:1 -> 6.70:1 */
-    --status-danger: 0 74% 42%; /* muted 배경에서 4.31:1 -> 5.84:1 */
-    --status-info: 212 83% 45%; /* 4.87:1 통과 — 불필요한 시각 변화를 피해 유지 */
+    --status-danger: 0 66.39% 46.67%; /* #C62828 */
+    --status-info: 213.51 65.68% 33.14%; /* #1D4E8C */
   }
 
-  /* 다크 의미색은 전부 5.8:1 이상으로 이미 통과 — 실측 후 의도적으로 유지한다 */
+  /* 다크 의미색도 v3 고정 hex로 통일 */
   .dark {
-    --status-success: 148 63% 66%;
-    --status-warning: 43 95% 70%;
+    --status-success: 146.97 50.7% 57.84%; /* #5DCA8E */
+    --status-warning: 41.91 86.9% 55.1%; /* #F0B429 */
     --status-caution: 28 91% 66%;
-    --status-danger: 0 86% 73%;
-    --status-info: 205 90% 72%;
+    --status-danger: 0 80.89% 69.22%; /* #F07171 */
+    --status-info: 213.55 66.91% 72.75%; /* #8BB4E8 */
   }
 
   * {

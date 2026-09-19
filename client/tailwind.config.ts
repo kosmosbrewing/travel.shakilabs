@@ -11,7 +11,9 @@ const config: Config = {
       center: true,
       padding: "1rem",
       screens: {
-        xl: "960px",
+        // 72rem(1152px, 검정 헤더 .sh-global-header__inner 폭) + padding 1rem×2 = 1184px.
+        // 본문 컨테이너를 헤더·2차 내비(@shakilabs/ui 0.3.29)와 같은 줄에 맞춘다.
+        xl: "1184px",
       },
     },
     extend: {
@@ -79,15 +81,6 @@ const config: Config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        },
-        // 셀러 수수료 비교 전용 색상
-        profit: {
-          DEFAULT: "hsl(var(--profit))",
-          foreground: "hsl(var(--profit-foreground))",
-        },
-        fee: {
-          DEFAULT: "hsl(var(--fee))",
-          foreground: "hsl(var(--fee-foreground))",
         },
         status: {
           success: "hsl(var(--status-success))",
