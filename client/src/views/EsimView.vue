@@ -56,7 +56,7 @@ const faqJsonLd = {
         <FreshBadge :message="TRAVEL_BADGE_MESSAGE" />
       </div>
       <div class="retro-panel-content space-y-4">
-        <p class="text-caption leading-relaxed text-muted-foreground">혼자 가는지, 여럿이 가는지에 따라 가장 싼 통신 옵션이 달라집니다. 총 데이터 사용량까지 함께 넣어 바로 비교하세요.</p>
+        <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">혼자 가는지, 여럿이 가는지에 따라 가장 싼 통신 옵션이 달라집니다. 총 데이터 사용량까지 함께 넣어 바로 비교하세요.</p>
         <CalculatorInteractionTracker calculator-id="esim" page-path="/travel/esim">
           <EsimCalculator />
         </CalculatorInteractionTracker>

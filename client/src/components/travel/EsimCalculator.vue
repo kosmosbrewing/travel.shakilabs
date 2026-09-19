@@ -70,7 +70,7 @@ function selectPreset(key: string): void {
       />
     </div>
 
-    <p class="text-caption leading-relaxed text-muted-foreground">{{ TRAVEL_ASSUMPTION_NOTE }}</p>
+    <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">{{ TRAVEL_ASSUMPTION_NOTE }}</p>
     <TravelMetricGrid :items="metrics" />
     <TravelCostBars title="통신 옵션 총비용 그래프" :rows="result.rows" />
     <AffiliateLinkPanel

@@ -60,7 +60,7 @@ const faqJsonLd = {
         <FreshBadge :message="TRAVEL_BADGE_MESSAGE" />
       </div>
       <div class="retro-panel-content space-y-4">
-        <p class="text-caption leading-relaxed text-muted-foreground">여행 인원, 가방 개수, 왕복 여부에 따른 예산 범위를 계산합니다. 실제 요금은 노선과 운임 종류를 선택한 뒤 항공사에서 확인하세요.</p>
+        <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">여행 인원, 가방 개수, 왕복 여부에 따른 예산 범위를 계산합니다. 실제 요금은 노선과 운임 종류를 선택한 뒤 항공사에서 확인하세요.</p>
         <CalculatorInteractionTracker calculator-id="luggage" page-path="/travel/luggage">
           <LuggageCalculator />
         </CalculatorInteractionTracker>

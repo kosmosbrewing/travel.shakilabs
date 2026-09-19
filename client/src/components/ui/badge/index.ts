@@ -15,7 +15,7 @@ export const badgeVariants = cva(
         // 알파를 걷고 배경 토큰을 글자색으로 뒤집어 라이트 6.51:1 · 다크 8.64:1 확보.
         neutral: "border-border/50 bg-muted-foreground text-background",
         // /12는 Tailwind opacity 스케일 밖이라 배경이 생성되지 않았다 -> /10
-        profit: "border-transparent bg-profit/10 text-profit",
+        profit: "border-transparent bg-status-success/10 text-status-success",
       },
     },
     defaultVariants: {
