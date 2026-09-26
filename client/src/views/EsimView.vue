@@ -4,13 +4,11 @@ import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import FaqAccordionPanel from "@/components/common/FaqAccordionPanel.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
-import FreshBadge from "@/components/common/FreshBadge.vue";
 import EsimCalculator from "@/components/travel/EsimCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import CalculatorInteractionTracker from "@/components/analytics/CalculatorInteractionTracker.vue";
 import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
-import { TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
 import { ESIM_GUIDE } from "@/data/seoGuides";
 
 const faqItems = [
@@ -50,18 +48,11 @@ const faqJsonLd = {
   <div class="sh-container sh-container--tool space-y-5 py-5">
     <CalculatorPageHeader title="eSIM·로밍·와이파이 비교" />
 
-    <div class="retro-panel overflow-hidden">
-      <div class="retro-titlebar rounded-t-2xl">
-        <h2 class="retro-title">통신 조건 입력</h2>
-        <FreshBadge :message="TRAVEL_BADGE_MESSAGE" />
-      </div>
-      <div class="retro-panel-content space-y-4">
-        <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">혼자 가는지, 여럿이 가는지에 따라 가장 싼 통신 옵션이 달라집니다. 총 데이터 사용량까지 함께 넣어 바로 비교하세요.</p>
-        <CalculatorInteractionTracker calculator-id="esim" page-path="/travel/esim">
-          <EsimCalculator />
-        </CalculatorInteractionTracker>
-      </div>
-    </div>
+    <!-- 안내문은 계산기 1×2 틀 위에 둔다. 입력 카드 머리글·배지는 틀 안 입력 칸으로 옮겼다(EsimCalculator). -->
+    <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">혼자 가는지, 여럿이 가는지에 따라 가장 싼 통신 옵션이 달라집니다. 총 데이터 사용량까지 함께 넣어 바로 비교하세요.</p>
+    <CalculatorInteractionTracker calculator-id="esim" page-path="/travel/esim">
+      <EsimCalculator />
+    </CalculatorInteractionTracker>
     <TravelNextActions current-tool="esim" />
     <FaqAccordionPanel :items="mergedFaqs" />
     <SeoRichGuide

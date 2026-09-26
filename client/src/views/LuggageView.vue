@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { ShSurface, ShText } from "@shakilabs/ui";
 import { mergeFaqs } from "@/lib/faqMerge";
 import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import FaqAccordionPanel from "@/components/common/FaqAccordionPanel.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
-import FreshBadge from "@/components/common/FreshBadge.vue";
 import LuggageCalculator from "@/components/travel/LuggageCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import CalculatorInteractionTracker from "@/components/analytics/CalculatorInteractionTracker.vue";
 import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
-import { LUGGAGE_SOURCES, TRAVEL_BADGE_MESSAGE } from "@/data/travelData";
+import { LUGGAGE_SOURCES } from "@/data/travelData";
 import { LUGGAGE_GUIDE } from "@/data/seoGuides";
 
 const faqItems = [
@@ -54,29 +52,23 @@ const faqJsonLd = {
   <div class="text-resize-layout sh-container sh-container--tool space-y-5 py-5">
     <CalculatorPageHeader title="LCC 수하물 예산 계산기" />
 
-    <ShSurface padding="none" class="overflow-hidden">
-      <div class="retro-titlebar rounded-t-2xl">
-        <ShText as="h2" variant="heading">수하물 조건 입력</ShText>
-        <FreshBadge :message="TRAVEL_BADGE_MESSAGE" />
-      </div>
-      <div class="retro-panel-content space-y-4">
-        <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">여행 인원, 가방 개수, 왕복 여부에 따른 예산 범위를 계산합니다. 실제 요금은 노선과 운임 종류를 선택한 뒤 항공사에서 확인하세요.</p>
-        <CalculatorInteractionTracker calculator-id="luggage" page-path="/travel/luggage">
-          <LuggageCalculator />
-        </CalculatorInteractionTracker>
-        <div class="flex flex-wrap gap-x-3 gap-y-1 text-tiny text-muted-foreground">
-          <span>공식 요금 확인:</span>
-          <a
-            v-for="source in LUGGAGE_SOURCES"
-            :key="source.name"
-            :href="source.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="retro-link"
-          >{{ source.name }}</a>
-        </div>
-      </div>
-    </ShSurface>
+    <!-- 안내문은 계산기 1×2 틀 위에 둔다. 입력 카드 머리글·배지는 틀 안 입력 칸으로 옮겼다(LuggageCalculator). -->
+    <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">여행 인원, 가방 개수, 왕복 여부에 따른 예산 범위를 계산합니다. 실제 요금은 노선과 운임 종류를 선택한 뒤 항공사에서 확인하세요.</p>
+    <CalculatorInteractionTracker calculator-id="luggage" page-path="/travel/luggage">
+      <LuggageCalculator />
+    </CalculatorInteractionTracker>
+    <!-- 공식 요금 링크는 예전처럼 계산기 끝(순위표 다음)에 둔다 -->
+    <div class="flex flex-wrap gap-x-3 gap-y-1 text-tiny text-muted-foreground">
+      <span>공식 요금 확인:</span>
+      <a
+        v-for="source in LUGGAGE_SOURCES"
+        :key="source.name"
+        :href="source.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="retro-link"
+      >{{ source.name }}</a>
+    </div>
     <TravelNextActions current-tool="luggage" />
     <FaqAccordionPanel :items="mergedFaqs" />
     <SeoRichGuide
