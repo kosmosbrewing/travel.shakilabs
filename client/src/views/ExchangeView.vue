@@ -4,13 +4,11 @@ import AffiliateDisclosure from "@/components/common/AffiliateDisclosure.vue";
 import FaqAccordionPanel from "@/components/common/FaqAccordionPanel.vue";
 import SEOHead from "@/components/common/SEOHead.vue";
 import SeoRichGuide from "@/components/common/SeoRichGuide.vue";
-import FreshBadge from "@/components/common/FreshBadge.vue";
 import ExchangeCalculator from "@/components/travel/ExchangeCalculator.vue";
 import CalculatorPageHeader from "@/components/travel/CalculatorPageHeader.vue";
 import CalculatorInteractionTracker from "@/components/analytics/CalculatorInteractionTracker.vue";
 import TravelNextActions from "@/components/travel/TravelNextActions.vue";
 import { travelAffiliateItems } from "@/data/affiliateLinks";
-import { EXCHANGE_RATE_STATUS } from "@/data/exchangeRates";
 import { EXCHANGE_GUIDE } from "@/data/seoGuides";
 
 const faqItems = [
@@ -50,22 +48,11 @@ const faqJsonLd = {
   <div class="sh-container sh-container--tool space-y-5 py-5">
     <CalculatorPageHeader title="환전 수수료 비교" />
 
-    <div class="retro-panel overflow-hidden">
-      <div class="retro-titlebar rounded-t-2xl">
-        <h2 class="retro-title">환전 조건 입력</h2>
-        <!-- 이 배지만 요금 점검일이 아니라 환율 기준일을 말한다 (/about에 이유를 적어 두었다) -->
-        <FreshBadge :message="EXCHANGE_RATE_STATUS.lastUpdated" />
-      </div>
-      <div class="retro-panel-content space-y-4">
-        <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">같은 환전금액이라도 적용 우대율에 따라 예상 수수료가 달라집니다. 거래 은행 앱에서 실제 우대율을 확인한 뒤 비교하세요.</p>
-        <p class="max-w-[65ch] rounded-lg border border-border bg-muted/30 px-3 py-2 text-caption leading-relaxed text-muted-foreground">
-          환율 출처: {{ EXCHANGE_RATE_STATUS.source }}
-        </p>
-        <CalculatorInteractionTracker calculator-id="exchange" page-path="/travel/exchange">
-          <ExchangeCalculator />
-        </CalculatorInteractionTracker>
-      </div>
-    </div>
+    <!-- 안내문은 계산기 1×2 틀 위에 둔다. 입력 카드 머리글·환율 기준일 배지·환율 출처는 틀 안으로 옮겼다(ExchangeCalculator). -->
+    <p class="max-w-[65ch] text-caption leading-relaxed text-muted-foreground">같은 환전금액이라도 적용 우대율에 따라 예상 수수료가 달라집니다. 거래 은행 앱에서 실제 우대율을 확인한 뒤 비교하세요.</p>
+    <CalculatorInteractionTracker calculator-id="exchange" page-path="/travel/exchange">
+      <ExchangeCalculator />
+    </CalculatorInteractionTracker>
     <TravelNextActions current-tool="exchange" />
     <FaqAccordionPanel :items="mergedFaqs" />
     <SeoRichGuide
