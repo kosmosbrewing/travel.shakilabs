@@ -15,8 +15,7 @@ import { TRAVEL_HOME_GUIDE } from "@/data/seoGuides";
   />
   <div class="sh-container sh-container--page space-y-5 py-5">
     <ShSurface padding="lg">
-      <ShText as="p" variant="caption" tone="muted">TRAVEL TOOL DIRECTORY</ShText>
-      <ShText as="h1" variant="display" class="mt-2">출국 전 비용을 한곳에서 점검하세요</ShText>
+      <ShText as="h1" variant="display">출국 전 비용을 한곳에서 점검하세요</ShText>
       <ShText tone="muted" class="mt-3 max-w-3xl">
         짐, 통신, 환전처럼 여행 전에 결정할 항목을 필요한 순서대로 비교하세요.
       </ShText>
