@@ -36,8 +36,7 @@ const itemListJsonLd = {
 
   <div class="sh-container sh-container--page space-y-5 py-5">
     <ShSurface padding="lg">
-      <ShText as="p" variant="caption" tone="muted">SHAKILABS TRAVEL</ShText>
-      <ShText as="h1" variant="display" class="mt-2">
+      <ShText as="h1" variant="display">
         항공권을 끊은 다음부터가 진짜입니다
       </ShText>
       <ShText tone="muted" class="mt-3 max-w-3xl">
@@ -48,13 +47,13 @@ const itemListJsonLd = {
       <div class="mt-4 flex flex-wrap gap-2">
         <RouterLink
           to="/luggage"
-          class="inline-flex items-center gap-1 rounded-xl bg-primary px-4 py-2 text-caption font-semibold text-primary-foreground no-underline"
+          class="sh-button sh-button--primary sh-button--md no-underline"
         >
           수하물부터 계산하기 <ArrowRight class="h-4 w-4" aria-hidden="true" />
         </RouterLink>
         <RouterLink
           to="/all"
-          class="inline-flex items-center gap-1 rounded-xl border border-border px-4 py-2 text-caption font-semibold text-foreground no-underline"
+          class="sh-button sh-button--secondary sh-button--md no-underline"
         >
           계산기 사용법 보기
         </RouterLink>
