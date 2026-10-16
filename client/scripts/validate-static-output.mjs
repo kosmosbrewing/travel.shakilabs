@@ -1,10 +1,12 @@
 import { existsSync, readFileSync } from "node:fs";
+import { validateNoindex } from "./validate-noindex.mjs";
+import { NOINDEX_ROUTES as NOINDEX_ROUTES_FOR_GATE } from "./seo-routes.mjs";
 import { validateBuiltFontSizes } from "./validate-built-font-sizes.mjs";
 import { validateNoTinyTextUtilities } from "./validate-no-tiny-text.mjs";
 import { validateParagraphLength } from "./validate-paragraph-length.mjs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { SEO_ROUTES } from "./seo-routes.mjs";
+import { SEO_ROUTES, SITEMAP_ROUTES } from "./seo-routes.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(__dirname, "..");
@@ -114,9 +116,9 @@ function readSitemapUrls() {
   return [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 }
 
-// 사이트맵 = SEO_ROUTES 전수, 순서까지 동일해야 한다.
+// 사이트맵 = SITEMAP_ROUTES(색인 대상) 전수, 순서까지 동일해야 한다.
 function validateSitemap(actualUrls) {
-  const expectedUrls = SEO_ROUTES.map(canonicalUrlFor);
+  const expectedUrls = SITEMAP_ROUTES.map(canonicalUrlFor);
 
   assert(JSON.stringify(actualUrls) === JSON.stringify(expectedUrls),
     "Sitemap must list exactly the SEO routes");
@@ -164,6 +166,8 @@ function validateRouterRoutesAreListed(sitemapUrls) {
   for (const route of routerRoutes) {
     // 파라미터·캐치올 라우트는 정적 URL이 아니고, 리다이렉트는 위 규칙대로 제외한다
     if (route.redirect || route.path.includes(":")) continue;
+    // 색인 소거(2026-10-16): NOINDEX_ROUTES는 라우터에 있고 프리렌더되지만 사이트맵에 없다(validate-noindex.mjs가 noindex를 확인)
+    if (NOINDEX_ROUTES_FOR_GATE.includes(route.path)) continue;
     assert(sitemapUrls.has(canonicalUrlFor(route.path)),
       `Router route is missing from the sitemap: ${canonicalUrlFor(route.path)}`);
   }
@@ -216,3 +220,7 @@ validateParagraphLength({ distRoot });
 // v8c(2026-10-04): 배포되는 CSS·HTML의 글자 크기를 직접 잰다 — 13px 미만은 차트 축 눈금(__scale)·차트 전용 text-[12px]만.
 const builtFontDeclarations = validateBuiltFontSizes({ distRoot: distRoot });
 console.log(`Validated built font sizes — ${builtFontDeclarations} declarations, 0 under 13px outside the chart-axis allowance.`);
+
+// 색인 소거 게이트(2026-10-16): 사이트맵 ⇔ noindex 없음, 사이트맵 밖 self-canonical ⇔ noindex, NOINDEX_ROUTES 전수 확인
+const noindexChecked = validateNoindex({ distRoot: distRoot, siteUrl: "https://shakilabs.com/travel", noindexRoutes: NOINDEX_ROUTES_FOR_GATE });
+console.log(`Validated noindex/sitemap consistency across ${noindexChecked} built pages (${NOINDEX_ROUTES_FOR_GATE.length} noindex routes).`);
