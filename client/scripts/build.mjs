@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
-import { SEO_ROUTE_CONFIGS, SEO_ROUTES } from "./seo-routes.mjs";
+import { SEO_ROUTES, SITEMAP_ROUTE_CONFIGS } from "./seo-routes.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(__dirname, "..");
@@ -25,7 +25,7 @@ function resolveBuildDate() {
 
 function renderSitemap(buildDate) {
   const baseUrl = "https://shakilabs.com/travel";
-  const urls = SEO_ROUTE_CONFIGS
+  const urls = SITEMAP_ROUTE_CONFIGS
     .map(
       // cleanUrls가 "/travel/"를 "/travel"로 리다이렉트하므로 홈은 슬래시 없이 실어야
       // 한다 (canonical·og:url도 슬래시 없는 형태다 — 셋이 어긋나면 모순 신호가 된다).

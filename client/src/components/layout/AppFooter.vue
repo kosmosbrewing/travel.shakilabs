@@ -15,7 +15,6 @@ const policyLinks = [
   { to: "/about", label: "사이트 안내" },
   { to: "/terms", label: "이용약관" },
   { to: "/privacy", label: "개인정보 처리방침" },
-  { to: "", href: "/blog", label: "블로그" },
   { to: "", href: `mailto:${SUPPORT_EMAIL}`, label: "문의" },
 ];
 
