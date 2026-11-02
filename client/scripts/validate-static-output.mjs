@@ -14,6 +14,9 @@ const repositoryRoot = resolve(projectRoot, "..");
 const distRoot = resolve(projectRoot, "dist");
 const canonicalBase = "https://shakilabs.com/travel";
 const MIN_MAIN_TEXT = 1500;
+// 허브(/)는 인덱스다 — 한 문장 도입·질문 카드 3장·기준 금액 표. 설명 절은 2026-11 UI 감사에서 뺐다.
+// 도구 라우트는 1,500 그대로.
+const HUB_MIN_MAIN_TEXT = 700;
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -86,8 +89,9 @@ function validateRoute(route) {
 
   // 얇은 콘텐츠 바닥선. 사이트맵에 올린 URL은 심사자가 열어보는 URL이다.
   const textLength = mainTextLength(html);
-  assert(textLength >= MIN_MAIN_TEXT,
-    `Thin content for ${route}: ${textLength} chars (min ${MIN_MAIN_TEXT})`);
+  const minMainText = route === "/" ? HUB_MIN_MAIN_TEXT : MIN_MAIN_TEXT;
+  assert(textLength >= minMainText,
+    `Thin content for ${route}: ${textLength} chars (min ${minMainText})`);
 }
 
 // AdSense 심사 필수 3요소(제3자 광고 쿠키 고지·맞춤 광고 안내·옵트아웃 2링크)와
