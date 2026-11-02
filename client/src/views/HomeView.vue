@@ -8,7 +8,6 @@ import SEOHead from "@/components/common/SEOHead.vue";
 import {
   HOME_COST_TABLE,
   HOME_INTENTS,
-  HOME_MECHANISMS,
   TRAVEL_HOME_UPDATED,
 } from "@/data/homeHighlights";
 import { buildCanonicalUrl } from "@/lib/site";
@@ -39,17 +38,17 @@ const itemListJsonLd = {
       <ShText as="h1" variant="display">
         항공권을 끊은 다음부터가 진짜입니다
       </ShText>
+      <!-- 허브 도입은 한 문장. 세 문장 설명·"왜 눈에 안 띄나" 절 3개는 2026-11 UI 감사에서 뺐다(GA4 28일 허브 조회 0).
+           1차 CTA는 이 앱 1위 도구(환전, 네이버 유입 기준). -->
       <ShText tone="muted" class="mt-3 max-w-3xl">
-        여행 예산은 대개 항공권과 숙소로 잡습니다. 그런데 정작 예산을 넘기는 쪽은 수하물,
-        현지 데이터, 환전처럼 결제 순간에야 금액이 드러나는 항목들입니다. 셋 다 출국 전에
-        조건을 넣어 보면 미리 답이 나오는 것들이라, 계산기 세 개로 정리해 뒀습니다.
+        수하물·현지 데이터·환전처럼 결제 순간에야 드러나는 비용을 출국 전에 계산하는 도구 3개.
       </ShText>
       <div class="mt-4 flex flex-wrap gap-2">
         <RouterLink
-          to="/luggage"
+          to="/exchange"
           class="sh-button sh-button--primary sh-button--md no-underline"
         >
-          수하물부터 계산하기 <ArrowRight class="h-4 w-4" aria-hidden="true" />
+          환전부터 계산하기 <ArrowRight class="h-4 w-4" aria-hidden="true" />
         </RouterLink>
         <RouterLink
           to="/all"
@@ -63,9 +62,6 @@ const itemListJsonLd = {
     <section aria-labelledby="home-intents-title">
       <div class="mb-3">
         <ShText id="home-intents-title" as="h2" variant="heading">지금 궁금한 질문부터 고르세요</ShText>
-        <ShText variant="caption" tone="muted" class="mt-1">
-          질문을 누르면 해당 계산기로 바로 이동합니다.
-        </ShText>
       </div>
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <RouterLink
@@ -83,19 +79,6 @@ const itemListJsonLd = {
         </RouterLink>
       </div>
     </section>
-
-    <ShSurface as="section" padding="lg" aria-labelledby="home-mechanisms-title">
-      <ShText id="home-mechanisms-title" as="h2" variant="heading">이 돈은 왜 눈에 안 띄나</ShText>
-      <ShText variant="caption" tone="muted" class="mt-1">
-        세 비용이 각각 어디에 숨어 있는지 먼저 알면 계산 결과를 읽기 쉬워집니다.
-      </ShText>
-      <div class="mt-4 space-y-4">
-        <div v-for="mechanism in HOME_MECHANISMS" :key="mechanism.key">
-          <ShText as="h3" variant="body" class="font-semibold">{{ mechanism.title }}</ShText>
-          <ShText tone="muted" class="mt-1 max-w-3xl">{{ mechanism.body }}</ShText>
-        </div>
-      </div>
-    </ShSurface>
 
     <ShSurface as="section" padding="lg" aria-labelledby="home-costs-title">
       <ShText id="home-costs-title" as="h2" variant="heading">계산에 쓰는 기준 금액</ShText>
@@ -121,9 +104,7 @@ const itemListJsonLd = {
         </TableBody>
       </Table>
       <ShText variant="caption" tone="muted" class="mt-3 max-w-3xl">
-        위 금액은 견적이 아니라 예산 범위를 잡기 위한 가정값입니다. 항공사 노선과 운임 조건,
-        통신 판매처 프로모션, 실시간 환율에 따라 실제 결제 금액은 달라지므로 결제 직전에는
-        각 공식 페이지에서 확인해 주세요.
+        견적이 아니라 예산 범위를 잡기 위한 가정값입니다. 결제 직전에는 각 공식 페이지에서 확인해 주세요.
       </ShText>
     </ShSurface>
 
